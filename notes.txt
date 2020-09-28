@@ -1,0 +1,15 @@
+Intro to D3
+    - https://d3js.org/
+    - JavaScript library for visualizing data using web standards.
+    - Almost as many stars as React on Github
+        - https://github.com/d3/d3
+    - Open Source and used by a lot of companies
+    - There are a lot of libraries built on D3
+
+Insights into learning D3
+    - It can be difficult to learn and understand
+    - Try not to use copy and paste code
+    - It is not always maintainable/understandable
+
+Data DOM Manipulation
+    - 
