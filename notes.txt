@@ -11,5 +11,24 @@ Insights into learning D3
     - Try not to use copy and paste code
     - It is not always maintainable/understandable
 
-Data DOM Manipulation
+Data + DOM Manipulation
+    - D3 code is split into 2 areas
+        - Data Manipulation and DOM manipulation
+    - Data Manipulation is where variables declared, datasets set up etc
+        - D3 is very good at manipulating data
+    - DOM Manipulation
+        - A lot of people use D3 to manipulate the page where data is rendered
+        - D3.select is similar to using JQuery $ followed by a CSS selector
+        - A grouping element operates similar to a div
+        - A tranforming is similar to an attribute
+        - Binding data to the DOM is the most confusing part of D3
+        - D3 uses the enter-exit lifecycle to keep everything up to date
+        - D3 daisy-chain semantics, this is just looping through data
+
+Scales
+    - They help translate between 2 different spaces
+    - They are the most versatile and useful part of the D3 API
+        - Most examples will have scales
+    - They are a function which maps a domain to a range
+        - They take an input dataset and calculate the output data
     - 
