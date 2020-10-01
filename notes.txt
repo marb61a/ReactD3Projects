@@ -43,4 +43,14 @@ Scales
 
 Layouts
     - These can be thought of as prebuilt calculations
+    - They allow you to put in a dataset which will then perform actions automatically
+    - There are a lot of layouts available
+        - They are the data ie they do not render anything but give the information needed to render something
+    - A piechart for example is a layout
+
+Why use React + D3
+    - React can help with D3's issues with readability, maintainability etc
+    - React is designed to perform declarative rendering
+        - This will eliminate worrying about the enter-exit lifecycle
+    - Using the alphabetexample.js file (demo only!)
     - 
