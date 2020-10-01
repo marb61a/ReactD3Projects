@@ -3,13 +3,40 @@ class Dataviz extends Component {
         return(
             <g transform={translate}>
                 <Histogram 
-                    data={}
-                    value={}
-                    x={}
-                    y={}
+                    data={this.props.data}
+                    value={d => d.base_salary}
+                    x={0}
+                    y={0}
                     width={400}
                     height={200}
-                    title=""
+                    title="All"
+                />
+                <Histogram 
+                    data={engineerData}
+                    value={d => d.base_salary}
+                    x={450}
+                    y={0}
+                    width={400}
+                    height={200}
+                    title="Engineer"
+                />
+                <Histogram 
+                    data={programmerData}
+                    value={d => d.base_salary}
+                    x={0}
+                    y={220}
+                    width={400}
+                    height={200}
+                    title="Programmer"
+                />
+                <Histogram 
+                    data={developerData}
+                    value={d => d.base_salary}
+                    x={450}
+                    y={220}
+                    width={400}
+                    height={200}
+                    title="Developer"
                 />
             </g>
         )

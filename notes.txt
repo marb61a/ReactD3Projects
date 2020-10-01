@@ -59,4 +59,13 @@ Why use React + D3
     - Using the React\D3 approach components become more readable and reusable
     - The example uses histograms which would be difficult to uses as easily under solely D3
         - histogramexamples.js 
-    -
+        - Even if React is not familiar this file should be easily understandable
+    - Code should be as easy to read as possible
+        - This is to help all people on a team read and understand it
+    - React with SVG
+        - SVG -- Scalable Vector Graphics
+        - It is an image format which uses XML to describe shapes on screen
+        - This makes it easy to use with JSX
+        - It is not GPU accelerated so if there are many elements performance can be affected
+    - The main takeaway is the React will deal better with the DOM and D3 with properties
+    - 
