@@ -31,4 +31,16 @@ Scales
         - Most examples will have scales
     - They are a function which maps a domain to a range
         - They take an input dataset and calculate the output data
+    - Ordinal scales are easiest as they map directly from a domain to a range
+        - This means mapping keys directly to their values
+    - Linear scales are more difficult and are used to translate between values and screen position
+        - The beginning of the domain maps to the beginning of the range
+        - This is also true of the top of the domain
+        - There is interpolation of everything that is inbetween
+            - This is also true of other scales types
+            - It is also possible to go beyond the domain and the scale will try figuring the values
+    - Experiment with things rather than know by heart
+
+Layouts
+    - These can be thought of as prebuilt calculations
     - 
