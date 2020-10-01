@@ -53,4 +53,10 @@ Why use React + D3
     - React is designed to perform declarative rendering
         - This will eliminate worrying about the enter-exit lifecycle
     - Using the alphabetexample.js file (demo only!)
-    - 
+        - The code itself just loops through letters and returns a letter
+        - It reshuffles the letters every 1.5 seconds
+    - React performs rerendering after changes very well
+    - Using the React\D3 approach components become more readable and reusable
+    - The example uses histograms which would be difficult to uses as easily under solely D3
+        - histogramexamples.js 
+    -
