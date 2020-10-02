@@ -88,4 +88,8 @@ Existing Libraries
         - Built using React/D3
         - No longer in beta
         - Again it is easy to use and everything is animated
+    - Nivo
+        - https://nivo.rocks/
+        - React/D3 data visualisation components
+        - 
     -
