@@ -8,5 +8,21 @@ const styles = {
 }
 
 const data = [
-
+    { quarter: 1, earnings: 13000},
+    { quarter: 1, earnings: 16250},
+    { quarter: 1, earnings: 14500},
+    { quarter: 1, earnings: 19000}
 ];
+
+const App = () => (
+    <div style={styles}>
+        <h1>Victory Demo</h1>
+        <VictoryChart>
+            <VictoryBar data={data} x="quarter" y="earnings"/>
+        </VictoryChart>
+    </div>
+);
+
+render(
+    <App />, document.getElementById("root")
+);

@@ -81,4 +81,10 @@ Existing Libraries
         - victoryjsdemo.js
         - This reimplements a lot of the D3 API
         - It can be good for when basic charts with no customisation is needed
+        - This will automatically add axis and is responsive
+        - It will use a self-generated fake dataset if created without one
+    - Recharts
+        - https://recharts.org/en-US/
+        - Built using React/D3
+        - No longer in beta
     -
