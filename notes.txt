@@ -99,4 +99,7 @@ Existing Libraries
         - https://vx-demo.now.sh/
         - vxexample.js
         - A very flexible library
+        - Used by a AirBnB
+        - It keeps D3 as the data engine and React as the rendering engine
+        - Is the most powerful example and can be difficult to learn
     -

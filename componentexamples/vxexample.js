@@ -25,11 +25,14 @@ const App = ({ width = 400, height = 400 }) => {
 
     // Scales
     const xScale = scaleBand({
-
+        rangeRound: [0, xMax],
+        domain: data.map(x),
+        padding: 0.4
     });
 
     const yScale = scaleLinear({
-
+        rangeRound: [yMax, 0],
+        domain: [0, max(data, y)]
     });
 
     return(
@@ -38,7 +41,17 @@ const App = ({ width = 400, height = 400 }) => {
             <svg width={width} height={height}>
                 {
                     data.map((di) => {
-                        
+                        const barHeight = yMax - yScale(y(d));
+
+                        return(
+                            <Bar 
+                                width={xScale.banwidth()}
+                                height={barHeight}
+                                x={xScale(x(d))}
+                                y={yMax - barHeight}
+                                data={{ x: x(d), y: y(d) }}
+                            />
+                        );
                     })
                 }
             </svg>
