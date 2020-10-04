@@ -17,5 +17,36 @@ const data = [
 ];
 
 const App = ({ width = 400, height = 400 }) => {
+    const xMax = width;
+    const yMax = height;
 
-}
+    const x = d => d.quarter;
+    const y = d => d.earnings;
+
+    // Scales
+    const xScale = scaleBand({
+
+    });
+
+    const yScale = scaleLinear({
+
+    });
+
+    return(
+        <div style={styles}>
+            <h1>VX Demo</h1>
+            <svg width={width} height={height}>
+                {
+                    data.map((di) => {
+                        
+                    })
+                }
+            </svg>
+        </div>
+    );
+};
+
+render(
+    <App />, document.getElementById("root")
+);
+
