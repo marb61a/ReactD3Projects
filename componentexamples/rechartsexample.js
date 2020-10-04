@@ -9,9 +9,9 @@ const styles = {
 
 const data = [
     { quarter: 1, earnings: 13000},
-    { quarter: 1, earnings: 16250},
-    { quarter: 1, earnings: 14500},
-    { quarter: 1, earnings: 19000}
+    { quarter: 2, earnings: 16250},
+    { quarter: 3, earnings: 14500},
+    { quarter: 4, earnings: 19000}
 ];
 
 const App = () => (

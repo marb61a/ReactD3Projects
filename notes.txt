@@ -85,11 +85,18 @@ Existing Libraries
         - It will use a self-generated fake dataset if created without one
     - Recharts
         - https://recharts.org/en-US/
+        - rechartsexample.js
         - Built using React/D3
         - No longer in beta
         - Again it is easy to use and everything is animated
     - Nivo
         - https://nivo.rocks/
         - React/D3 data visualisation components
-        - 
+        - nivoexample.js
+        - There is a lot of features implemented by default
+        - A lot of features can be difficult to disable
+    - VX
+        - https://vx-demo.now.sh/
+        - vxexample.js
+        - A very flexible library
     -
