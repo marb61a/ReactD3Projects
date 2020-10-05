@@ -108,5 +108,8 @@ Integrate D3 code into a React Project
         - This is the simplest approach
         - This is where any D3 code can be taken and wrapped in a React component and added to a React Project
         - An example is using code that creates an axis, this can be difficult if being done from scratch
-        - d3axiscode.js
+            - This is because there are a lot of smaller moving parts which can affect the axis
+        - d3axiscode.js 
+            - D3 code only in the example
+        - 
     - 
