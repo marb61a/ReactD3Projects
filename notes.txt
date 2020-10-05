@@ -111,5 +111,10 @@ Integrate D3 code into a React Project
             - This is because there are a lot of smaller moving parts which can affect the axis
         - d3axiscode.js 
             - D3 code only in the example
-        - 
+        - axisreactexample (folder)
+            - Containing both D3 and React code
+            - This will make use of the React lifecycle methods
+            - D3 will control rendering in the example
+            - This is what makes it blackbox as React will no longer control rendering
+        -
     - 

@@ -8,8 +8,9 @@ const styles = {
 }
 
 const App = () => (
-    <svg>
-
+    <svg width="800" height="400" id="svg">
+        <Axis y={10}/>
+        <Axis y={10}/>
     </svg>
 );
 
