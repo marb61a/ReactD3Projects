@@ -8,14 +8,27 @@ class Axis extends Component{
         this.d3render();
     }
 
+    // Needed as d3 controls the rendering and the component may change
     componentDidUpdate(){
         this.d3render();
     }
 
     d3render(){
-
+        const scale = d3
+            .scaleLinear()
+            .domain([0, 10])
+            .range([0, 200]);
+        
+        const axis = d3.axisBottom(scale);
+        d3.select(this.gRef.current).call(axis);
     }
-    
+
+    render(){
+        const { y } = this.props;
+        return (
+            <g transform={`translate(10, ${y})`} ref={this.gRef} />
+        );
+    }
 }
 
 export default Axis;

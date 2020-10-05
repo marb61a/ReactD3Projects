@@ -116,5 +116,9 @@ Integrate D3 code into a React Project
             - This will make use of the React lifecycle methods
             - D3 will control rendering in the example
             - This is what makes it blackbox as React will no longer control rendering
-        -
+            - React class components allow for using refs
+            - Refs can be used to have a reference to a specific DOM node
+    - Higher Order Component (blackbox)
+        - Writing the lifecycle methods (componentDidMount, componentDidUpdate) may get tedious
+        - 
     - 
