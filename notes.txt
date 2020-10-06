@@ -123,5 +123,12 @@ Integrate D3 code into a React Project
         - hocexample (folder) 
         - A Higher Order Component  is a component that returns other components
             - Components will be taken as arguments and wrapped in additional functionality
-        - Example will reuse the barchart example code from previouly to demonstrate how to render anything
+        - Example will reuse the barchart example code from previously to demonstrate how to render anything
+        - The example code uses D3 v4 whereas the course uses D3 v5
+        - There is a difference in data loading functions
+            - d3.tsv is a data loading function (Barchart.js)
+            - This makes a request to a url and returns tab separated values
+            - This is now promises based by default (It was callback)
+        - Blackbox components can be problematic when there are many 
+            - This is because of the rerendering needed(An expensive operation)
     - 

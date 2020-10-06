@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 
 import Axis from './axis';
 import Barchart from './Barchart';
+import './style.css';
 
 const styles = {
     fontFamily: 'sans-serif',
@@ -11,8 +12,9 @@ const styles = {
 
 const App = () => (
     <svg width="800" height="400" id="svg">
-        {/* <Axis x={10} y={50}/> */}
-        <Barchart />
+        <Axis x={10} y={50}/>
+        <Barchart width={300} height={300} />
+        <Barchart width={300} height={300} x={0} y={250}/>
     </svg>
 );
 
