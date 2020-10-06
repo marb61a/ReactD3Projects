@@ -123,5 +123,5 @@ Integrate D3 code into a React Project
         - hocexample (folder) 
         - A Higher Order Component  is a component that returns other components
             - Components will be taken as arguments and wrapped in additional functionality
-        - 
+        - Example will reuse the barchart example code from previouly to demonstrate how to render anything
     - 
