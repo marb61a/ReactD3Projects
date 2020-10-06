@@ -120,5 +120,8 @@ Integrate D3 code into a React Project
             - Refs can be used to have a reference to a specific DOM node
     - Higher Order Component (blackbox)
         - Writing the lifecycle methods (componentDidMount, componentDidUpdate) may get tedious
+        - hocexample (folder) 
+        - A Higher Order Component  is a component that returns other components
+            - Components will be taken as arguments and wrapped in additional functionality
         - 
     - 
