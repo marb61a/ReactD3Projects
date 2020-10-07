@@ -3,14 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import * as d3 from "d3";
-
-const data = d3
-  .range(100)
-  .map(_ => [
-    Math.random(),
-    Math.random()
-  ]);
 
 const rootElement = document.getElementById('root');
 
