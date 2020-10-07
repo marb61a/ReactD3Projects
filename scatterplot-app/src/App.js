@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="App">
       <svg width="800" height="800"> 
-        <Scatterplot x={0} y={0} data={data} />
+        <Scatterplot x={50} y={50} data={data} />
       </svg>
     </div>
   );
