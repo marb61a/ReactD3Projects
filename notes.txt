@@ -131,4 +131,17 @@ Integrate D3 code into a React Project
             - This is now promises based by default (It was callback)
         - Blackbox components can be problematic when there are many 
             - This is because of the rerendering needed(An expensive operation)
-    - 
+    - Full Feature Integration
+        - Blackbox approach uses too much D3 and not enough of the React approach
+        - Full Feature Integration will get React to do rendering and D3 to do the data manipulation
+        - There will be a scatterplot example built using this approach
+        - There are 2 different cases
+            - Props don't change, this makes components less flexible but is easier to put in place
+            - Props change
+
+Scatterplot App
+    - Use create-react-app to to create scatterplot-app folder
+        - https://github.com/facebook/create-react-app
+        - Creates a react app with a lot of setup already done
+    - This app will show the props don't change scenario first
+    -
