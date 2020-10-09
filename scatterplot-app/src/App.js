@@ -11,14 +11,20 @@ const data = d3
     Math.random()
   ]);
 
-function App() {
-  return (
-    <div className="App">
-      <svg width="800" height="800"> 
-        <Scatterplot x={50} y={50} data={data} />
-      </svg>
-    </div>
-  );
+class App extends React.Component{
+  state = {
+
+  }
+
+  render(){
+    return (
+      <div className="App">
+        <svg width="800" height="800"> 
+          <Scatterplot x={50} y={50} width={300} height={300} data={data} />
+        </svg>
+      </div>
+    );
+  }
 }
 
 export default App;

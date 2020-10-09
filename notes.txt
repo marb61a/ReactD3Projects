@@ -144,4 +144,15 @@ Scatterplot App
         - https://github.com/facebook/create-react-app
         - Creates a react app with a lot of setup already done
     - This app will show the props don't change scenario first
+    - To run the app change into the directory and npm start
+    - App runs on http://localhost:3000/
+    - App function will be in the app.js file
+    - Setting up components to accept both x and y inputs allow for changing screen position
+    - Having dataviz components in their own file makes navigation through codebase easier
+        - This is more useful in large projects
+    - Axis can also be added to the scatterplot diagram
+        - In this case it was a previously used axis which was reused
+    - In the first implementation of the scatterplot there is no update when props change
+        - This will be changed by changing the width and height based on how many times it has been clicked
+        - In App.js change to a class based component
     -
