@@ -13,14 +13,21 @@ const data = d3
 
 class App extends React.Component{
   state = {
+    width: 300,
+    height: 200
+  };
 
-  }
+  onClick = () => this.setState({
+    width: this.state.width * 0.8,
+    height: this.setState.height * 0.8
+  });
 
   render(){
     return (
       <div className="App">
-        <svg width="800" height="800"> 
-          <Scatterplot x={50} y={50} width={300} height={300} data={data} />
+        <svg width="800" height="800" onClick={this.onClick}> 
+          <Scatterplot x={50} y={50} data={data} width={this.state.width} height={this.state.height}  />
+          <Scatterplot x={50} y={350} data={data} width={this.state.width} height={this.state.height}  />
         </svg>
       </div>
     );

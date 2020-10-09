@@ -19,10 +19,12 @@ class Scatterplot extends React.Component{
         return(
             <g transform={`translate(${x}, ${y})`} >
                 {
-                    data.map(([x, y]) => <circle cx={this.xScale(x)} cy={this.yScale(y)} r="3" />)
+                    data.map(
+                        ([x, y]) => (<circle cx={this.xScale(x)} cy={this.yScale(y)} r="3" />
+                    ))
                 }
-                <Axis x={0} y={0} scale={this.yScale} type="Left"/>
-                <Axis x={0} y={height} scale={this.xScale} type="Bottom" />
+                <Axis x={0} y={0} scale={this.yScale} type="Left" label="Y"/>
+                <Axis x={0} y={height} scale={this.xScale} type="Bottom" label="X" />
             </g>
         );
     }

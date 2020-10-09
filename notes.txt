@@ -155,4 +155,10 @@ Scatterplot App
     - In the first implementation of the scatterplot there is no update when props change
         - This will be changed by changing the width and height based on how many times it has been clicked
         - In App.js change to a class based component
+        - This will have state which will then be changed by using an onClick method to reduce size
+            - This will be by 20% on every click (reduced)
+        - This will only move the x axis
+            - This is because of how componentDidUpdate works
+                - This method runs after an update has occurred so stale data is being used
+        -
     -
