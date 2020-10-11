@@ -165,5 +165,10 @@ Scatterplot App
             - This was introduced in React 16.3
             - Firstly move the xScale and yScale into state
             - getDerivedStateFromProps take two parameters, props and state, it is also static
-        -
-    -
+        - If using a large dataset it maybe a good idea to use memoization to avoid perfromance issues
+    - Using PureComponent to extend rather than Component will reduce the amount of times getDerivedStateFromProps gets called
+        - PureComponent is a little bit cleverer about using getDerivedStateFromProps
+    - Using renderProps to give control of what individual data points look like to outside
+        - This has been called Inversion Of Control (IOC) or Renderless Components
+        - Although the scatterplot knows how to render a scatterplot it does not need to know how to render a data point
+    - 

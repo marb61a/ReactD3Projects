@@ -3,6 +3,7 @@ import './App.css';
 
 import * as d3 from "d3";
 import Scatterplot from "./Scatterplot"
+import Datapoint from './Datapoint';
 
 const data = d3
   .range(100)
@@ -26,8 +27,22 @@ class App extends React.Component{
     return (
       <div className="App">
         <svg width="800" height="800" onClick={this.onClick}> 
-          <Scatterplot x={50} y={50} data={data} width={this.state.width} height={this.state.height}  />
-          <Scatterplot x={50} y={350} data={data} width={this.state.width} height={this.state.height}  />
+          <Scatterplot 
+            x={50} 
+            y={50} 
+            data={data} 
+            width={this.state.width} 
+            height={this.state.height}
+            datapoint={({ x, y}) => <Datapoint x={x} y={y} />}
+          />
+          <Scatterplot 
+            x={50} 
+            y={350} 
+            data={data} 
+            width={this.state.width} 
+            height={this.state.height} 
+            datapoint={({ x, y}) => <Datapoint x={x} y={y} />}
+          />
         </svg>
       </div>
     );
