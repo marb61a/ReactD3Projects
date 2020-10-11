@@ -160,5 +160,10 @@ Scatterplot App
         - This will only move the x axis
             - This is because of how componentDidUpdate works
                 - This method runs after an update has occurred so stale data is being used
+                - If D3 data is changed after rendering it is not going to be rendered until the next update
+        - The way around the componentDidUpdate issue is to use the getDerivedStateFromProps lifecycle method
+            - This was introduced in React 16.3
+            - Firstly move the xScale and yScale into state
+            - getDerivedStateFromProps take two parameters, props and state, it is also static
         -
     -

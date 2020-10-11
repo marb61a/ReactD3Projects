@@ -19,7 +19,7 @@ class App extends React.Component{
 
   onClick = () => this.setState({
     width: this.state.width * 0.8,
-    height: this.setState.height * 0.8
+    height: this.state.height * 0.8
   });
 
   render(){
