@@ -12,6 +12,13 @@ const data = d3
     Math.random()
   ]);
 
+const data2 = d3
+  .range(100)
+  .map(_ => [
+    Math.random(),
+    Math.random()
+  ]);
+
 class App extends React.Component{
   state = {
     width: 300,
@@ -37,11 +44,11 @@ class App extends React.Component{
           />
           <Scatterplot 
             x={50} 
-            y={350} 
+            y={450} 
             data={data} 
-            width={this.state.width} 
-            height={this.state.height} 
-            datapoint={({ x, y}) => <Datapoint x={x} y={y} />}
+            width={300} 
+            height={200} 
+            datapoint={({ x, y}) => <circle cx={x} cy={y} r="5" />}
           />
         </svg>
       </div>
