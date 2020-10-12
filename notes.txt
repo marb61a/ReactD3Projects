@@ -171,4 +171,6 @@ Scatterplot App
     - Using renderProps to give control of what individual data points look like to outside
         - This has been called Inversion Of Control (IOC) or Renderless Components
         - Although the scatterplot knows how to render a scatterplot it does not need to know how to render a data point
+        - Datapoint will now be a component itself
+        - The Datapoint component will make use of Styled Components
     - 

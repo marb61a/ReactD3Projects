@@ -25,14 +25,14 @@ class Scatterplot extends React.PureComponent{
     }
 
     render(){
-        const {x, y, data, height} = this.props;
+        const {x, y, data, width, height, datapoint } = this.props;
         const { xScale, yScale } = this.state;
 
         return(
             <g transform={`translate(${x}, ${y})`} >
                 {
                     data.map(
-                        ([x, y]) => (<circle cx={xScale(x)} cy={yScale(y)} r="3" />
+                        ([x, y]) => datapoint({x: xScale(x), y: yScale(y)}
                     ))
                 }
                 <Axis x={0} y={0} scale={yScale} type="Left" label="Y"/>
