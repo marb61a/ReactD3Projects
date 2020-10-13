@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 import * as d3 from "d3";
@@ -18,6 +18,41 @@ const data2 = d3
     Math.random(),
     Math.random()
   ]);
+
+const App = () => {
+  const [ dimension, setDimensions ] = useState({
+    width: 300,
+    height: 300
+  });
+
+  const [data, setData] = useState(
+    d3.range(100)
+      .map(_ => [Math.random(), Math.random()])
+  );
+
+  return (
+    <div className="App">
+      <svg width="800" height="800" onClick={onClick}> 
+        <Scatterplot 
+          x={50} 
+          y={50} 
+          data={data} 
+          width={this.state.width} 
+          height={this.state.height}
+          datapoint={({ x, y}) => <Datapoint x={x} y={y} />}
+        />
+        <Scatterplot 
+          x={50} 
+          y={450} 
+          data={data} 
+          width={300} 
+          height={200} 
+          datapoint={({ x, y}) => <circle cx={x} cy={y} r="5" />}
+        />
+      </svg>
+    </div>
+  );
+}  
 
 class App extends React.Component{
   state = {
