@@ -193,5 +193,7 @@ Scatterplot App
                 - This can be a replacement for componentDidMount and similar
             - useContext will be the same as React Context which is for communicating between components
                 - This avoids prop drilling and replaces some state management libraries
-        - 
+        - There is an open source library available which will simplify changing to hooks
+            - https://github.com/Swizec/d3blackbox
+        -
     -
