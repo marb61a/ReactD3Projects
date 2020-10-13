@@ -178,4 +178,20 @@ Scatterplot App
         - There is a reason for not importing the datapoint file into scatterplot
             - This is done through props which gives the opportunity to have different scatterplots
             - This also makes the components reusable
-    - 
+    - React Hooks
+        - React hooks were introduced in React 16
+        - They are backwards compatable
+        - There will/should not be wholesale rewrites of app so undertanding old React code is still needed
+        - There are 3 main hooks which are accompanied by others
+        - The 3 main hooks are useState, useEffect and useContext
+            - useState will manage the component state
+                - This is a function which will take a default value and returns state and a setter for changing state
+            - useEffect will manage side effects of Components
+                - This takes a function which runs when there is a change
+                - This can be a very good place to interact with API
+                - The second argument tells React when to run the effect
+                - This can be a replacement for componentDidMount and similar
+            - useContext will be the same as React Context which is for communicating between components
+                - This avoids prop drilling and replaces some state management libraries
+        - 
+    -
