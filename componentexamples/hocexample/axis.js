@@ -46,7 +46,7 @@ const Axis = ({ x, y }) => {
         
         const axis = d3.axisBottom(scale);
 
-        d3.select(gRef.current).call(axis);
+        d3.select(anchor).call(axis);
     });
 
     return(

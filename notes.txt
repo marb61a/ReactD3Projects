@@ -195,5 +195,18 @@ Scatterplot App
                 - This avoids prop drilling and replaces some state management libraries
         - There is an open source library available which will simplify changing to hooks
             - https://github.com/Swizec/d3blackbox
-        -
+        - Refactoring the scatterplot example to use hooks
+        - The hook being used a lot is useMemo
+            - This is short for useMemoisation and can be thought of as similar to a cache
+            - This takes a function that generates a value or values
+    - A lot of people do not architect state well
+        - Avoid rewriting things from scratch 6 months down the line
+        - Optimise architecture for change, this is because a project evolves
+        - Redux/Mobx will not be used as they are not needed (like in a lot of projects)
+
+Creating a new Project
+    - This will be done with create-react-app bootstrap app
+        - https://github.com/facebook/create-react-app
+    - This is the first React/D3 data visualisation project
+        - Simply type create-react-app <app_name> -- In this case reactdataviz-project
     -
