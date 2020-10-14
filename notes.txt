@@ -209,4 +209,6 @@ Creating a new Project
         - https://github.com/facebook/create-react-app
     - This is the first React/D3 data visualisation project
         - Simply type create-react-app <app_name> -- In this case reactdataviz-project
-    -
+    - To run the created project
+        - Change into project directory and either yarn start or npm start
+    - 
