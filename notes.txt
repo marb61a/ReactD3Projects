@@ -211,4 +211,15 @@ Creating a new Project
         - Simply type create-react-app <app_name> -- In this case reactdataviz-project
     - To run the created project
         - Change into project directory and either yarn start or npm start
+    - After changing into project directory there are some dependencies to be installed
+        - D3, topojson, lodash, string, bootstrap
+        - Bootstrap is used but not recommended instead tailwind or similar or custom CSS is suggested
+    - The first step is to build a preloader then there will be a chloropleth built
+        - Data is up until 2016, not important as learning to scrape is not the focus of the project
+        - The preloader will show a screenshot of the finished visualisation while data is loading
+        - This is important as there is a lot of data to show and load
+        - This may take a couple of seconds
+    - Then use a screenshot of the completed site and add to an image folder
+    - Within the /src folder create a components folder
+        - The first file to be added is a Preloader file which will load the screenshot until data is loaded
     - 
