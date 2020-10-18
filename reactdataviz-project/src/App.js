@@ -19,7 +19,7 @@ function App() {
       setMedianIncomes(medianIncomes)
       setCountyNames(countyNames)
     });
-  }, {});
+  }, []);
 
   // Shows screenshot if techSalaries is not loaded
   if(techSalaries.length < 1){
