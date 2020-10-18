@@ -18,7 +18,16 @@ const cleanSalary = (d) => {
 
     return{
         employer: d.employer,
-
+        submit_date: dateParse(d["submit date"]),
+        start_date: dateParse(d["start date"]),
+        case_status: d["case status"],
+        job_title: d["job title"],
+        clean_job_title: d["job title"],
+        base_salary: Number(d["base salary"]),
+        city: d["city"],
+        state: d["state"],
+        county: d["county"],
+        countyID: d["countyID"]
     }
 }
 
@@ -27,3 +36,21 @@ const cleanUSStateName = (d) => ({
     id: Number(d.id),
     name: d.name
 });
+
+const cleanCounty = (d) => ({
+    id: Number(d.id),
+    name: d.name
+});
+
+export const loadAllData = (callback = _.noop) => {
+    Promise.all([
+        d3.json("data/us.json"),
+        d3.csv("data/us-county-names-normalized.csv", cleanCounty),
+        d3.csv("data/county-median-incomes.csv", cleanIncome),
+        d3.csv("data/h1bs-2012-2016-shortened.csv", cleanSalary),
+        d3.csv("data/us-state-names.tsv", cleanUSStateName),
+    ])
+        .then(
+            ([us, countyNames, medianIncomes, techSalaries, USstateNames]) = {}
+        )
+}
