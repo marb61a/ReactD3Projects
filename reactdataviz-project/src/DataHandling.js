@@ -51,7 +51,7 @@ export const loadAllData = async () => {
         d3.csv("data/us-state-names.tsv", cleanUSStateName),
     ]);
     
-    const [us, countyNames, medianIncomes, techSalaries, USstateNames] = datasets;
+    let [us, countyNames, medianIncomes, techSalaries, USstateNames] = datasets;
 
     let medianIncomesMap = {};
 
@@ -63,5 +63,18 @@ export const loadAllData = async () => {
             d["countyID"] = _.find(countyNames, {name: d["countyName"]}).id;
             medianIncomesMap[d.countyID] = d;
         });
+
+    techSalaries = techSalaries
+        .filter((d) => !_.isNull(d));
+    
+    return{
+        usTopoJson: us,
+        countyNames: countyNames,
+        medianIncomes: medianIncomesMap,
+        medianIncomesByCounty: _.groupBy(medianIncomes, "countyName"),
+        medianIncomesByUSState: _.groupBy(medianIncomes, "USstate"),
+        techSalaries: techSalaries,
+        USstateNames: USstateNames
+    };
 
 }

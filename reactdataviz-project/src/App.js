@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 import './App.css';
 import Preloader from './components/Preloader';
+import CountyMap from './components/CountyMap';
 import { loadAllData } from './DataHandling';
 
 function App() {
@@ -11,12 +12,14 @@ function App() {
   const [medianIncomes, setMedianIncomes] = useState([]);
   const [countyNames, setCountyNames] = useState([]);
 
-  async function loadData(data) {
+  async function loadData() {
+    const data = await loadAllData();
     const { techSalaries, medianIncomes, countyNames } = data;
 
-    setTechSalaries(techSalaries)
-    setMedianIncomes(medianIncomes)
-    setCountyNames(countyNames)
+      setTechSalaries(techSalaries);
+      setMedianIncomes(medianIncomes);
+      setCountyNames(countyNames);
+
   };
 
   useEffect(() => {
@@ -27,9 +30,10 @@ function App() {
   if(techSalaries.length < 1){
     return <Preloader />
   } else {
-    return <div className="App">
-      <h1>Loaded {techSalaries.length} salaries </h1>
-    </div>
+    return (<div className="App">
+        <h1>Loaded {techSalaries.length} salaries </h1>
+      </div>
+    )
   }
 
 }
