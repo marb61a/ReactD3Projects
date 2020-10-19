@@ -22,9 +22,33 @@ function App() {
 
   };
 
+  // Needs to access local state so cannot be outside App function
+  function countyValue(county, techSalariesMap){
+    const medianHousehold = this.state.medianIncomes[county.id];
+    const salaries = techSalariesMap[county.name];
+
+    if(!medianHousehold || salaries){
+      return null;
+    }
+
+    const median = d3
+      .median(salaries, (d) => d.base_salary);
+    
+    return{
+      countyID: county.id,
+      value: median - medianHousehold.medianIncome
+    }
+  }
+
   useEffect(() => {
     loadData();
   }, []);
+
+  const filteredSalaries = techSalaries;
+  const filteredSalariesMap = _.groupBy(filteredSalaries, "countyID")
+  const countyValues = countyNames
+    .map((county) => this.countyValue(county, filteredSalariesMap))
+    .filter((d) => !_.isNull(d));
 
   // Shows screenshot if techSalaries is not loaded
   if(techSalaries.length < 1){
