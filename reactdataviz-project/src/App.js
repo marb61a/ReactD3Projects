@@ -11,14 +11,16 @@ function App() {
   const [medianIncomes, setMedianIncomes] = useState([]);
   const [countyNames, setCountyNames] = useState([]);
 
-  useEffect(() => {
-    loadAllData((data) => {
-      const { techSalaries, medianIncomes, countyNames } = data;
+  async function loadData(data) {
+    const { techSalaries, medianIncomes, countyNames } = data;
 
-      setTechSalaries(techSalaries)
-      setMedianIncomes(medianIncomes)
-      setCountyNames(countyNames)
-    });
+    setTechSalaries(techSalaries)
+    setMedianIncomes(medianIncomes)
+    setCountyNames(countyNames)
+  };
+
+  useEffect(() => {
+    loadData();
   }, []);
 
   // Shows screenshot if techSalaries is not loaded

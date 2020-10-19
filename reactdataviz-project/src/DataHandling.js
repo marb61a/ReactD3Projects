@@ -42,15 +42,26 @@ const cleanCounty = (d) => ({
     name: d.name
 });
 
-export const loadAllData = (callback = _.noop) => {
-    Promise.all([
+export const loadAllData = async () => {
+    const datasets = await Promise.all([
         d3.json("data/us.json"),
         d3.csv("data/us-county-names-normalized.csv", cleanCounty),
         d3.csv("data/county-median-incomes.csv", cleanIncome),
         d3.csv("data/h1bs-2012-2016-shortened.csv", cleanSalary),
         d3.csv("data/us-state-names.tsv", cleanUSStateName),
-    ])
-        .then(
-            ([us, countyNames, medianIncomes, techSalaries, USstateNames]) = {}
+    ]);
+    
+    const [us, countyNames, medianIncomes, techSalaries, USstateNames] = datasets;
+
+    let medianIncomesMap = {};
+
+    medianIncomes
+        .filter((d) => 
+            _.find(countyNames, {name: d["countyName"]})
         )
+        .forEach((d) => {
+            d["countyID"] = _.find(countyNames, {name: d["countyName"]}).id;
+            medianIncomesMap[d.countyID] = d;
+        });
+
 }
