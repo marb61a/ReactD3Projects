@@ -70,6 +70,7 @@ function App() {
           <CountyMap 
             usTopoJson={usTopoJson}
             USstateNames={USstateNames}
+            values={countyValues}
             x={0}
             y={0}
             width={500}

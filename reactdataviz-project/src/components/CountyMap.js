@@ -1,7 +1,7 @@
 import React from 'react';
 import * as d3 from 'd3';
 import * as topojson from 'topojson';
-import _ from 'lodash';
+import _, { values } from 'lodash';
  
 const CountyMap = ({
     usTopoJson,
@@ -10,7 +10,8 @@ const CountyMap = ({
     y,
     width,
     height,
-    zomm
+    zoom,
+    values
 }) => {
     const projection = d3
         .geoAlbersUsa()
@@ -28,14 +29,38 @@ const CountyMap = ({
         projection.scale(width * 4.5);
         const centroid = geoPath.centroid(_.find(USstatePaths, { id: id}));
         const translate = projection.translate();
-        
+
+        projection.translate([
+            translate[0] - centroid[0] + width/2,
+            translate[1] - centroid[1] + height/2
+        ]);
+    }
+
+    if(values){
+        quantize.domain([
+            d3.quantile(values, 0.15, d => d.value),
+            d3.quantile(values, 0.85, d => d.value)
+        ])
     }
 
     if(!usTopoJson){
         return null;
     } else {
+        const us = usTopoJson;
+        const USstatesMesh = topojson.mesh(
+            us,
+            us.objects.states,
+            (a, b) => a !== b
+        )
+
         return(
-            <div></div>
+            <g>
+                {counties.map(feature => (
+                    <County 
+                    
+                    />
+                ))}
+            </g>
         )
     }
 }
