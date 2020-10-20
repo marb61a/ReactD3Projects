@@ -1,7 +1,7 @@
 import React from 'react';
 import * as d3 from 'd3';
 import * as topojson from 'topojson';
-import _, { values } from 'lodash';
+import _ from 'lodash';
  
 const CountyMap = ({
     usTopoJson,
@@ -51,15 +51,32 @@ const CountyMap = ({
             us,
             us.objects.states,
             (a, b) => a !== b
-        )
+        );
+        const counties = topojson.feature(us, us.objects.states).features;
+        const countyValueMap = _.fromPairs(
+            values.map(d => [d.CountyID, d.value])
+        );
 
         return(
             <g>
                 {counties.map(feature => (
                     <County 
-                    
+                        geoPath={geoPath}
+                        feature={feature}
+                        zoom={zoom}
+                        key={feature.id}
+                        quantize={quantize}
+                        value={countyValueMap[feature.id]}
                     />
                 ))}
+                <path 
+                    d={geoPath(USstatesMesh)}
+                    style={{
+                        fill: "none",
+                        stroke:"#fff",
+                        strokeLinejoin: "round"
+                    }}
+                />
             </g>
         )
     }

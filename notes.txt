@@ -222,4 +222,21 @@ Creating a new Project
     - Then use a screenshot of the completed site and add to an image folder
     - Within the /src folder create a components folder
         - The first file to be added is a Preloader file which will load the screenshot until data is loaded
-    - 
+    - Async data importing
+        - This will be done using promises and again the dataset is only until 2016
+        - Data scripts are downloaded and added to public/data folder
+        - useState will be needed for the different states (Salaries, Incomes, Counties)
+        - useEffect will then be used to load data on mount
+        - A couple of state functions are need because there is no state management being used eg Redux
+        - After loading the datasets in the DataHandling.js file they will then need to be tied together
+        - There will also be some refactoring to make use of React hooks
+    - Chloropleth Maps
+        - These will use different intensities of a color in different regions
+        - geoAlbersUsa is the specific map for rendering the United states
+        - Quantize splits dataset into chunks based on entered input
+            - This makes is easier to get different colour intensities for data
+        - geoPath is a path generator that returns all that is needed to draw a map of the US
+        - Centroid is a function from geoPath
+            - It allows for centering a map on a specific feature
+        -
+    -
