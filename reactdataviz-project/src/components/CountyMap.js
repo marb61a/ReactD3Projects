@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import * as topojson from 'topojson';
 import _ from 'lodash';
 
-const ChloroplethColos = _.reverse([
+const ChloroplethColors = _.reverse([
     "rgb(247,251,255)",
     "rgb(222,235,247)",
     "rgb(198,219,239)",
@@ -22,7 +22,32 @@ const County = ({
     zoom,
     quantize,
     value
-}) => {};
+}) => {
+    let color = BlankColor;
+    if(value){
+        color = ChloroplethColors[quantize(value)];
+    }
+
+    return(
+        <path 
+            d={geoPath(feature)}
+            style={{ fill: color }}
+            title={feature.id}
+        />
+    );
+};
+
+function useQuantize(values){
+    const scale = d3.scaleQuantize().range(d3.range(9));
+
+    if(values){
+        quantize.domain([
+            d3.quantile(values, 0.15, d => d.value),
+            d3.quantile(values, 0.85, d => d.value)
+        ])
+    }
+
+}
  
 const CountyMap = ({
     usTopoJson,
@@ -40,7 +65,7 @@ const CountyMap = ({
         .translate([width / 2, height / 2])
         .scale(width * 1.3);
     const geoPath = d3.geoPath().projection(projection);
-    const quantize = d3.scaleQuantize().range(d3.range(9));
+    const quantize = useQuantize(values);
 
     if(zoom && usTopoJson){
         const us = usTopoJson;
@@ -57,13 +82,6 @@ const CountyMap = ({
         ]);
     }
 
-    if(values){
-        quantize.domain([
-            d3.quantile(values, 0.15, d => d.value),
-            d3.quantile(values, 0.85, d => d.value)
-        ])
-    }
-
     if(!usTopoJson){
         return null;
     } else {
@@ -75,12 +93,12 @@ const CountyMap = ({
         );
         const counties = topojson.feature(us, us.objects.states).features;
         const countyValueMap = _.fromPairs(
-            values.map(d => [d.CountyID, d.value])
+            values.map(d => [d.countyID, d.value])
         );
 
         return(
             <g>
-                {counties.map(feature => (
+                {counties.map((feature) => (
                     <County 
                         geoPath={geoPath}
                         feature={feature}
