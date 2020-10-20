@@ -2,6 +2,27 @@ import React from 'react';
 import * as d3 from 'd3';
 import * as topojson from 'topojson';
 import _ from 'lodash';
+
+const ChloroplethColos = _.reverse([
+    "rgb(247,251,255)",
+    "rgb(222,235,247)",
+    "rgb(198,219,239)",
+    "rgb(158,202,225)",
+    "rgb(107,174,214)",
+    "rgb(66,146,198)",
+    "rgb(33,113,181)",
+    "rgb(8,81,156)",
+    "rgb(8,48,107)"
+]);
+
+const BlankColor = "rgb(240,240,240)";
+const County = ({
+    geoPath,
+    feature,
+    zoom,
+    quantize,
+    value
+}) => {};
  
 const CountyMap = ({
     usTopoJson,
