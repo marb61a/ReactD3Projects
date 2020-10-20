@@ -8,6 +8,7 @@ import CountyMap from './components/CountyMap';
 import { loadAllData } from './DataHandling';
 
 function App() {
+  // Will mean only rendering once rather than 5 times from different states
   const [datasets, setDatasets] = useState({
     techSalaries: [],
     medianIncomes: [],
@@ -16,6 +17,14 @@ function App() {
     USstateNames: null
   });
 
+  const {
+    techSalaries,
+    medianIncomes,
+    countyNames,
+    usTopoJson,
+    USstateNames
+  } = datasets;
+
   async function loadData() {
     const datasets = await loadAllData();
     setDatasets(datasets);
@@ -23,7 +32,7 @@ function App() {
 
   // Needs to access local state so cannot be outside App function
   function countyValue(county, techSalariesMap){
-    const medianHousehold = this.state.medianIncomes[county.id];
+    const medianHousehold = medianIncomes[county.id];
     const salaries = techSalariesMap[county.name];
 
     if(!medianHousehold || salaries){
