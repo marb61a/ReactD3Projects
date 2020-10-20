@@ -8,18 +8,17 @@ import CountyMap from './components/CountyMap';
 import { loadAllData } from './DataHandling';
 
 function App() {
-  const [techSalaries, setTechSalaries] = useState([]);
-  const [medianIncomes, setMedianIncomes] = useState([]);
-  const [countyNames, setCountyNames] = useState([]);
+  const [datasets, setDatasets] = useState({
+    techSalaries: [],
+    medianIncomes: [],
+    countyNames: [],
+    usTopoJson: null,
+    USstateNames: null
+  });
 
   async function loadData() {
-    const data = await loadAllData();
-    const { techSalaries, medianIncomes, countyNames } = data;
-
-      setTechSalaries(techSalaries);
-      setMedianIncomes(medianIncomes);
-      setCountyNames(countyNames);
-
+    const datasets = await loadAllData();
+    setDatasets(datasets);
   };
 
   // Needs to access local state so cannot be outside App function
@@ -47,8 +46,10 @@ function App() {
   const filteredSalaries = techSalaries;
   const filteredSalariesMap = _.groupBy(filteredSalaries, "countyID")
   const countyValues = countyNames
-    .map((county) => this.countyValue(county, filteredSalariesMap))
+    .map((county) => countyValue(county, filteredSalariesMap))
     .filter((d) => !_.isNull(d));
+  
+  let zoom = null;
 
   // Shows screenshot if techSalaries is not loaded
   if(techSalaries.length < 1){
@@ -56,6 +57,17 @@ function App() {
   } else {
     return (<div className="App">
         <h1>Loaded {techSalaries.length} salaries </h1>
+        <svg width="1100" height="500">
+          <CountyMap 
+            usTopoJson={usTopoJson}
+            USstateNames={USstateNames}
+            x={0}
+            y={0}
+            width={500}
+            height={500}
+            zoom={zoom}
+          />
+        </svg>
       </div>
     )
   }
