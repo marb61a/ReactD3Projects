@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import * as d3 from 'd3';
 import * as topojson from 'topojson';
 import _ from 'lodash';
@@ -38,35 +38,28 @@ const County = ({
 };
 
 function useQuantize(values){
-    const scale = d3.scaleQuantize().range(d3.range(9));
+    return useMemo(() => {
+        const scale = d3.scaleQuantize().range(d3.range(9));
 
-    if(values){
-        quantize.domain([
-            d3.quantile(values, 0.15, d => d.value),
-            d3.quantile(values, 0.85, d => d.value)
-        ])
-    }
+        if(values){
+            scale.domain([
+                d3.quantile(values, 0.15, d => d.value),
+                d3.quantile(values, 0.85, d => d.value)
+            ])
+        }
+
+        return scale;
+    }, [values]);
 
 }
- 
-const CountyMap = ({
-    usTopoJson,
-    USstateNames,
-    x,
-    y,
-    width,
-    height,
-    zoom,
-    values
-}) => {
+
+function useProjection({ width, height }){
     const projection = d3
         .geoAlbersUsa()
         .scale(1280)
         .translate([width / 2, height / 2])
         .scale(width * 1.3);
-    const geoPath = d3.geoPath().projection(projection);
-    const quantize = useQuantize(values);
-
+    
     if(zoom && usTopoJson){
         const us = usTopoJson;
         const USstatePaths = topojson.feature(us, us.objects.states).features;
@@ -81,6 +74,22 @@ const CountyMap = ({
             translate[1] - centroid[1] + height/2
         ]);
     }
+    
+}
+ 
+const CountyMap = ({
+    usTopoJson,
+    USstateNames,
+    x,
+    y,
+    width,
+    height,
+    zoom,
+    values
+}) => {
+    const projection = useProjection();
+    const geoPath = d3.geoPath().projection(projection);
+    const quantize = useQuantize(values);
 
     if(!usTopoJson){
         return null;
