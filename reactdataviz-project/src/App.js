@@ -45,7 +45,7 @@ function App() {
     const medianHousehold = medianIncomes[county.id];
     const salaries = techSalariesMap[county.name];
 
-    if(!medianHousehold || salaries){
+    if(!medianHousehold || !salaries){
       return null;
     }
 
@@ -74,7 +74,10 @@ function App() {
     return <Preloader />
   } else {
     return (<div className="App">
-        <h1>Loaded {techSalaries.length} salaries </h1>
+        <Title 
+          data={filteredSalaries}
+          filteredBy={filteredBy}
+        />
         <svg width="1100" height="500">
           <CountyMap 
             usTopoJson={usTopoJson}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useD3 } from "d3Blackbox";
+import { useD3 } from "d3blackbox";
 import * as d3 from 'd3';
 
 const Axis = ({ x, y, scale, type="bottom" }) => {
