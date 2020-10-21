@@ -9,6 +9,7 @@ import Preloader from './components/Preloader';
 import CountyMap from './components/CountyMap';
 import Histogram from './components/Histogram';
 import { loadAllData } from './DataHandling';
+import { Title } from "./components/Meta";
 
 function App() {
   // Will mean only rendering once rather than 5 times from different states
@@ -18,6 +19,12 @@ function App() {
     countyNames: [],
     usTopoJson: null,
     USstateNames: null
+  });
+
+  const [filteredBy, setFilteredBy] = useState({
+    USstate: "*",
+    year: "*",
+    jobTitle: "*"
   });
 
   const {
@@ -42,8 +49,7 @@ function App() {
       return null;
     }
 
-    const median = d3
-      .median(salaries, (d) => d.base_salary);
+    const median = d3.median(salaries, (d) => d.base_salary);
     
     return{
       countyID: county.id,

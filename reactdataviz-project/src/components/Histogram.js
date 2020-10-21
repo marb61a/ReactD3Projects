@@ -1,6 +1,8 @@
 import React from 'react';
 import * as d3 from 'd3';
 
+import Axis from './Axis';
+
 const HistogramBar = ({
     percent, x, y, width, height
 }) => {
@@ -31,7 +33,7 @@ const HistogramBar = ({
             </text>
         </g>
     );
-    
+
 }
 
 const Histogram = ({
@@ -69,6 +71,13 @@ const Histogram = ({
                     />
                 ))}
             </g>
+            <Axis 
+                x={axisMargin-3}
+                y={0}
+                data={bars}
+                scale={yScale}
+                type="Left"
+            />
         </g>
     )
 }
