@@ -83,7 +83,7 @@ function App() {
           <Histogram 
             bins={10}
             width={500}
-            height={height}
+            height={500}
             x="500"
             y="10"
             data={filteredSalaries}

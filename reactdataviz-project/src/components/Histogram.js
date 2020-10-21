@@ -2,7 +2,7 @@ import React from 'react';
 import * as d3 from 'd3';
 
 const Histogram = ({
-    width, height, x, y, data, axisMargin, bottomMargin, value
+    bins, width, height, x, y, data, axisMargin, bottomMargin, value
 }) => {
     const histogram = d3
         .histogram()
@@ -16,8 +16,25 @@ const Histogram = ({
         .scaleLinear()
         .domain([d3.min(counts), d3.max(counts)])
         .range([0, width - axisMargin]);
-    const yScale = d3.scaleLinear();
+    const yScale = d3
+        .scaleLinear()
+        .domain([0, d3.max(bars, (d) => d.x1)])
+        .range([height - y - bottomMargin, 0]);
 
+    return(
+        <g className="histogram" transform={`translate(${x}, ${y})`}>
+            <g className="bars">
+                {bars.map(
+                    (bar) => (
+                    <HistogramBar 
+                        percent={(bar.length / data.length)} 
+                        x={axisMargin}
+                        y={yScale(bar.x1)}
+                    />
+                ))}
+            </g>
+        </g>
+    )
 }
 
 export default Histogram;
