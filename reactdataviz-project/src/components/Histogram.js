@@ -1,6 +1,26 @@
 import React from 'react';
 import * as d3 from 'd3';
 
+const HistogramBar = ({
+    percent, x, y, width, height
+}) => {
+    let translate = `translate(${x}, ${y})`
+    let label = percent.toFixed(0) + "%";
+
+    if(percent < 1){
+        label = percent.toFixed(2) + "%";
+    }
+
+    if(width < 20){
+        label = label.replace("%", "");
+    }
+
+    if(width < 10){
+        label = "";
+    }
+    
+}
+
 const Histogram = ({
     bins, width, height, x, y, data, axisMargin, bottomMargin, value
 }) => {
@@ -30,6 +50,9 @@ const Histogram = ({
                         percent={(bar.length / data.length)} 
                         x={axisMargin}
                         y={yScale(bar.x1)}
+                        width={widthScale(bar.length)}
+                        height={yScale(bar.x0) - yScale(bar.x1)}
+                        key={`histogram-bar-${bar.x0}`}
                     />
                 ))}
             </g>
