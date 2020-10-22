@@ -119,13 +119,42 @@ class Description extends React.Component{
             }
 
             if(this.props.data.length / lastYear.length > 2){
-
+                fragment = ", " +
+                (this.props.data.length / lastYear.length).toFixed() +
+                " times more than the year before";
             } else {
-                
+                const percent = (
+                    (1 - lastYear.length / this.props.data.length) *100
+                ).toFixed()
+
+                fragment = ", " + Math.abs(percent) + "% " +
+                (percent > 0 ? "more" : "less") + " than the year before";
             }
         }
 
         return fragment;
+    }
+
+    get jobTitleFragment(){
+        const jobTitle = this.props.filteredBy.jobTitle;
+        let fragment;
+
+        if (jobTitle === "*") {
+            fragment = "H1B work visas";
+        } else {
+            if (jobTitle === "other") {
+                fragment = "H1B work visas";
+            } else {
+                fragment = `H1B work visas for software ${jobTitle}s`;
+            }
+        }
+
+        return fragment;
+    }
+
+    get countyFragment(){
+        const byCounty = _.groupBy(this.props.data);
+        
     }
 
     get format(){
