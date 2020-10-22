@@ -5,7 +5,7 @@ import {
     extent as d3extent,
     deviation as d3deviation
 } from 'd3-array';
-import _ from "lodash";
+import _, { sortBy } from "lodash";
 import S from "string";
 
 import USStatesMap from '../USstatesMap';
@@ -154,16 +154,46 @@ class Description extends React.Component{
 
     get countyFragment(){
         const byCounty = _.groupBy(this.props.data);
-        
+        const medians = this.props.medianIncomesByCounty;
+
+        let ordered = _.sortBy(
+            _.keys(byCounty)
+                .map((county) => byCounty[county])
+                .filter((d) => d.length / this.props.data.length > 0.01),
+            (items) => d3mean(items, (d) => d.base_salary) - medians[items[0].countyID][0].medianIncome
+        );
+
+        let best = ordered[ordered.length - 1];
+        let countyMedian = medians[best[0].countyID][0].medianIncome;
+        const byCity = _.groupBy(best, "city");
+
+        ordered = _.sortBy(
+            _.keys(byCity)
+                .map((city) => byCity[city])
+                .filter((d) => d.length / best.length > 0.01),
+            (items) => d3mean(items, (d) => d.base_salary) - countyMedian
+        );
+        best = ordered[ordered.length - 1];
+
+        return(
+            <span>
+                The best city {" "}
+                {jobFragemnt.length }
+            </span>
+        )
     }
 
     get format(){
         return scaleLinear()
-            .domain(d3extent(filteredSalaries, (d) => d.base_salary))
+            .domain(d3extent(this.props.data, (d) => d.base_salary))
             .tickFormat();
     }
 
     render(){
+        const format = this.format;
+        const mean = d3mean(this.props.data, (d) => d.base_salary);
+        const deviation = d3deviation(this.props.data, (d) => d.base_salary);
+
         return(
             <p className="lead">
 
