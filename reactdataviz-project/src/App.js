@@ -9,7 +9,7 @@ import Preloader from './components/Preloader';
 import CountyMap from './components/CountyMap';
 import Histogram from './components/Histogram';
 import { loadAllData } from './DataHandling';
-import { Title } from "./components/Meta";
+import { Title, Description } from "./components/Meta";
 
 function App() {
   // Will mean only rendering once rather than 5 times from different states
@@ -77,6 +77,12 @@ function App() {
         <Title 
           data={filteredSalaries}
           filteredBy={filteredBy}
+        />
+        <Description 
+          data={filteredSalaries}
+          allData={techSalaries}
+          filteredBy={filteredBy}
+          medianIncomes={this.state.medianIncomesByCounty}
         />
         <svg width="1100" height="500">
           <CountyMap 

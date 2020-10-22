@@ -1,6 +1,12 @@
 import React from 'react';
 import { scaleLinear } from 'd3-scale';
-import { mean as d3mean, extent as d3extent} from 'd3-array';
+import { 
+    mean as d3mean, 
+    extent as d3extent,
+    deviation as d3deviation
+} from 'd3-array';
+import _ from "lodash";
+import S from "string";
 
 import USStatesMap from '../USstatesMap';
 
@@ -17,21 +23,21 @@ export const Title = ({
         return USstate ===  "*" ? "" : USStatesMap[USstate.toUpperCase()];
     }
 
-    return function format(){
-        return scaleLinear
+    function format(){
+        return scaleLinear()
             .domain(d3extent(filteredSalaries, (d) => d.base_salary))
-            .tickFormat()
+            .tickFormat();
     }
 
-    function jobTitleFormat(){
+    function jobTitleFragment(){
         const { jobTitle, year } = filteredBy;
         let title = "";
 
         if(jobTitle === "*"){
             if(year === "*"){
-                title = "The average H1B pays"
+                title = "The average H1B in tech pays";
             } else {
-                title = "The average tech H1B paid"
+                title = "The average tech H1B paid";
             }
         } else {
             title = `Software ${jobTitle}s on a H1B`;
@@ -46,19 +52,25 @@ export const Title = ({
         return title;
     }
 
-    const mean = this.format(d3mean(filteredSalaries, (d) => d.base_salary));
+    const mean = format()(d3mean(filteredSalaries, (d) => d.base_salary));
     let title;
 
-    if(this.yearsFragment && this. USstateFragment){
+    if(yearsFragment && USstateFragment){
         title =(
             <h2>
-                In {this.USstateFragment}, 
-
+                In {USstateFragment}, {jobTitleFragment()}${mean}/year{" "}
+                {yearsFragment()}
             </h2>
         );
     } else {
-
+        title = (
+            <h2>
+                {jobTitleFragment()} ${mean}/year
+                {USstateFragment() ? `in ${USstateFragment()}` : ""}
+                { yearsFragment() }
+            </h2>
+        );
     }
 
     return title;
-}
+};
