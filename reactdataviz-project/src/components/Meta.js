@@ -93,6 +93,41 @@ class Description extends React.Component{
         return year === "*" ? "" : `In ${year}`;
     }
 
+    get USstateFragment(){
+        const USstate = this.props.filteredBy.USstate;
+        return USstate === "*" ? "" : USStatesMap[USstate.toUpperCase()];
+    }
+
+    get previousYearFragment(){
+        const year = this.props.filteredBy.year;
+        let fragment;
+
+        if(year === "*"){
+            fragment = "";
+        } else if(year === 2012) {
+            fragment = "";
+        } else {
+            const { USstate, jobTitle } = this.props.filteredBy;
+            let lastYear = this.allDataForYear(year - 1);
+
+            if(jobTitle !== "*"){
+                lastYear = this.allDataForUSstate(jobTitle, lastYear);
+            }
+
+            if (USstate !== "*") {
+                lastYear = this.allDataForUSstate(USstate, lastYear);
+            }
+
+            if(this.props.data.length / lastYear.length > 2){
+
+            } else {
+                
+            }
+        }
+
+        return fragment;
+    }
+
     get format(){
         return scaleLinear()
             .domain(d3extent(filteredSalaries, (d) => d.base_salary))
@@ -107,3 +142,5 @@ class Description extends React.Component{
         );
     }
 }
+
+export { Description };
