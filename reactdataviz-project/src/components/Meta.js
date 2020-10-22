@@ -175,10 +175,17 @@ class Description extends React.Component{
         );
         best = ordered[ordered.length - 1];
 
+        const city = S(best[0].city).titleCase().s + `, ${best[0].USstate}`;
+        const mean = d3mean(best, (d) => d.base_salary);
+        const jobFragment = this.jobTitleFragment
+            .replace("H1B work visas for", "")
+            .replace("H1B work visas", "");        
+
         return(
             <span>
                 The best city {" "}
-                {jobFragemnt.length }
+                { jobFragment.length ? `for ${jobFragment} on an H1B` : "for an H1B"}{" "}
+
             </span>
         )
     }

@@ -238,5 +238,24 @@ Creating a new Project
         - geoPath is a path generator that returns all that is needed to draw a map of the US
         - Centroid is a function from geoPath
             - It allows for centering a map on a specific feature
-        -
+        - React hooks and useMemo will be used to clean up the code
+            - This will also stop the excessive amount of rerenders
+    - Histogram of Salaries
+        - Histograms will automatically setup the number of bars just specify the number of bins needed
+        - SVG can be styled using plain CSS
+        - Histograms will be blue with white text
+        - D3 has a histogram generator
+        - A histogram is not exactly a barchart, a histogram will adjust its size depending on the size of the data
+        - HistogramBar is in the same file as Histogram
+            - Try to keep stuff that belogs together and is not used elsewhere in the same file
+    - Axis
+        - Will be reusing some of the code from earlier exercises
+        - Scale will be gotten from props rather than defined specifically
+    - Meta information
+        - Will contain both Meta and Description components
+            - because of this the description will now be dynamic
+        - This is not widely used as one is functional and the other class based
+        - They contain a large amount of similar information so can be put together
+        - Class based and functional components should be able to work together so there should not be an issue
+        - 
     -
