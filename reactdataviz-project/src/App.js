@@ -32,7 +32,8 @@ function App() {
     medianIncomes,
     countyNames,
     usTopoJson,
-    USstateNames
+    USstateNames,
+    medianIncomesByCounty
   } = datasets;
 
   async function loadData() {
@@ -82,7 +83,7 @@ function App() {
           data={filteredSalaries}
           allData={techSalaries}
           filteredBy={filteredBy}
-          medianIncomes={this.state.medianIncomesByCounty}
+          medianIncomesByCounty={medianIncomesByCounty}
         />
         <svg width="1100" height="500">
           <CountyMap 

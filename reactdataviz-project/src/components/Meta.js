@@ -74,3 +74,36 @@ export const Title = ({
 
     return title;
 };
+
+class Description extends React.Component{
+    allDataForYear(year, data = this.props.allData) {
+        return data.filter((d) => d.submit_date.getFullYear() === year);
+    }
+
+    allDataForJobTitle(jobTitle, data = this.props.allData) {
+        return data.filter((d) => d.clean_job_title === jobTitle);
+    }
+
+    allDataForUSstate(USstate, data = this.props.allData) {
+        return data.filter((d) => d.USstate === USstate);
+    }
+
+    get yearsFragment(){
+        const year = this.props.filteredBy.year;
+        return year === "*" ? "" : `In ${year}`;
+    }
+
+    get format(){
+        return scaleLinear()
+            .domain(d3extent(filteredSalaries, (d) => d.base_salary))
+            .tickFormat();
+    }
+
+    render(){
+        return(
+            <p className="lead">
+
+            </p>
+        );
+    }
+}
