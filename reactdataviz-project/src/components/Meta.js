@@ -185,7 +185,11 @@ class Description extends React.Component{
             <span>
                 The best city {" "}
                 { jobFragment.length ? `for ${jobFragment} on an H1B` : "for an H1B"}{" "}
-
+                {this.yearFragment ? "was" : "is"} <b>{city}</b> with an average
+                salary ${this.format(mean - countyMedian)} above the local
+                household median. Median household income is a good proxy for
+                cost of living in an area.{" "}
+                <a href="https://en.wikipedia.org/wiki/Household_income">[1]</a>.
             </span>
         )
     }
@@ -203,7 +207,17 @@ class Description extends React.Component{
 
         return(
             <p className="lead">
-
+                {this.yearsFragment ? this.yearsFragment : "Since 2012"} the{" "}
+                {this.UStateFragment} tech industry{" "}
+                {this.yearsFragment ? "sponsored" : "has sponsored"}{" "}
+                <b>
+                    {format(this.props.data.length)} {this.jobTitleFragment}
+                </b>
+                {this.previousYearFragment}. Most of them paid{" "}
+                <b>
+                    ${format(mean - deviation)} to ${format(mean + deviation)}
+                </b>{" "}
+                per year. {this.countyFragment}
             </p>
         );
     }

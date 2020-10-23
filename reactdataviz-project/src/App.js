@@ -8,6 +8,7 @@ import './style.css';
 import Preloader from './components/Preloader';
 import CountyMap from './components/CountyMap';
 import Histogram from './components/Histogram';
+import MedianLine from './components/MedianLine';
 import { loadAllData } from './DataHandling';
 import { Title, Description } from "./components/Meta";
 
@@ -33,7 +34,8 @@ function App() {
     countyNames,
     usTopoJson,
     USstateNames,
-    medianIncomesByCounty
+    medianIncomesByCounty,
+    medianIncomesByUSState
   } = datasets;
 
   async function loadData() {
@@ -69,6 +71,8 @@ function App() {
     .filter((d) => !_.isNull(d));
   
   let zoom = null;
+  let medianHousehold = this.state.medianIncomesByUSState["US"][0]
+    .medianIncome;
 
   // Shows screenshot if techSalaries is not loaded
   if(techSalaries.length < 1){
@@ -106,6 +110,9 @@ function App() {
             axisMargin={83}
             bottomMargin={5}
             value={(d) => d.base_salary}
+          />
+          <MedianLine 
+          
           />
         </svg>
       </div>
