@@ -19,7 +19,9 @@ function App() {
     medianIncomes: [],
     countyNames: [],
     usTopoJson: null,
-    USstateNames: null
+    USstateNames: null,
+    medianIncomesByUSState: {},
+    medianIncomesByCounty: {}
   });
 
   const [filteredBy, setFilteredBy] = useState({
@@ -71,7 +73,7 @@ function App() {
     .filter((d) => !_.isNull(d));
   
   let zoom = null;
-  let medianHousehold = this.state.medianIncomesByUSState["US"][0]
+  let medianHousehold = medianIncomesByUSState["US"][0]
     .medianIncome;
 
   // Shows screenshot if techSalaries is not loaded
