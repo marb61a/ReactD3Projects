@@ -112,7 +112,14 @@ function App() {
             value={(d) => d.base_salary}
           />
           <MedianLine 
-          
+            data={filteredSalaries}
+            x={500}
+            y={10}
+            width={600}
+            height={500}
+            bottomMargin={5}
+            median={medianHousehold}
+            value={(d) => d.base_salary}
           />
         </svg>
       </div>
