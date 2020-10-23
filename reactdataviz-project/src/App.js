@@ -9,6 +9,7 @@ import Preloader from './components/Preloader';
 import CountyMap from './components/CountyMap';
 import Histogram from './components/Histogram';
 import MedianLine from './components/MedianLine';
+import Controls from './components/Controls';
 import { loadAllData } from './DataHandling';
 import { Title, Description } from "./components/Meta";
 
@@ -23,6 +24,8 @@ function App() {
     medianIncomesByUSState: {},
     medianIncomesByCounty: {}
   });
+
+  const [ salariesFilter, setSalariesFilter ] = useState(() => true);
 
   const [filteredBy, setFilteredBy] = useState({
     USstate: "*",
@@ -45,7 +48,6 @@ function App() {
     setDatasets(datasets);
   };
 
-  // Needs to access local state so cannot be outside App function
   function countyValue(county, techSalariesMap){
     const medianHousehold = medianIncomes[county.id];
     const salaries = techSalariesMap[county.name];
@@ -62,24 +64,36 @@ function App() {
     }
   }
 
+  function updateDataFilter(filter, filteredBy){
+    setFilteredBy(filteredBy);
+    setSalariesFilter(() => filter);
+  }
+
   useEffect(() => {
     loadData();
   }, []);
 
-  const filteredSalaries = techSalaries;
+  const filteredSalaries = techSalaries.filter(salariesFilter);
   const filteredSalariesMap = _.groupBy(filteredSalaries, "countyID")
   const countyValues = countyNames
     .map((county) => countyValue(county, filteredSalariesMap))
     .filter((d) => !_.isNull(d));
-  
-  let zoom = null;
-  let medianHousehold = medianIncomesByUSState["US"][0]
-    .medianIncome;
 
-  // Shows screenshot if techSalaries is not loaded
   if(techSalaries.length < 1){
     return <Preloader />
   } else {
+    let zoom = null;
+    let medianHousehold = medianIncomesByUSState["US"][0]
+      .medianIncome;
+    
+    if (filteredBy.USstate !== "*") {
+      zoom = filteredBy.USstate;
+      medianHousehold = d3.mean(
+        medianIncomesByUSState[zoom],
+        (d) => d.medianIncome
+      );
+    }
+
     return (<div className="App">
         <Title 
           data={filteredSalaries}
