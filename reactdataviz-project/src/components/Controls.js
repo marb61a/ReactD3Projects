@@ -1,11 +1,37 @@
 import React, { useState, useEffect } from "react";
 
+const ControlRow = ({
+    data,
+    toggleNames,
+    picked,
+    updateDataFilter,
+}) => {
+    function makePick(picked, newState) {
+        updateDataFilter(picked, !newState);
+    }
+
+    return(
+        <div className="row">
+            <div className="col-md-12">
+                {toggleNames.map((name) => (
+                    <Toggle 
+                    
+                    />
+                ))}
+            </div>
+        </div>
+    );
+};
+
 const Controls = ({ data, updateDataFilter }) => {
     const [ filteredBy, setFilteredBy ] = useState({year: "*"});
     const [ filter, setFilter ] = useState({ year: () => true});
 
     function reportUpdateUpTheChain(){
-        updateDataFilter();
+        window.location.hash = [this.state.year || "*"].join("-");
+
+        const filter = (d) => filterFunctions.year(d);
+        updateDataFilter(filter, filteredBy);
     }
 
     const updateYearFilter = (year, reset) => {
@@ -19,9 +45,12 @@ const Controls = ({ data, updateDataFilter }) => {
         setFilteredBy((filteredBy) => {
             return { ...filteredBy, year };
         });
+
         setFilter((filter) => {
             return { ...filter, year: yearFilter}
         });
+
+        reportUpdateUpTheChain();
     }
 
     const years = new Set(data.map((d) => d.submit_date.getFullYear()));
