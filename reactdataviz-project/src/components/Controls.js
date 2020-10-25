@@ -5,6 +5,7 @@ const ControlRow = ({
     toggleNames,
     picked,
     updateDataFilter,
+    capitalize
 }) => {
     function makePick(picked, newState) {
         updateDataFilter(picked, !newState);
@@ -15,7 +16,11 @@ const ControlRow = ({
             <div className="col-md-12">
                 {toggleNames.map((name) => (
                     <Toggle 
-                    
+                        label={capitalize ? name.toUpperCase() : name}
+                        name={name}
+                        key={name}
+                        value={picked === name}
+                        onClick={makePick}
                     />
                 ))}
             </div>
@@ -24,8 +29,16 @@ const ControlRow = ({
 };
 
 const Controls = ({ data, updateDataFilter }) => {
-    const [ filteredBy, setFilteredBy ] = useState({year: "*"});
-    const [ filter, setFilter ] = useState({ year: () => true});
+    const [ filteredBy, setFilteredBy ] = useState({
+        year: "*",
+        USstate: "*",
+        jobTitle: "*"
+    });
+    const [ filter, setFilter ] = useState({
+        year: () => true,
+        USstateFilter: () => true,
+        jobTitle: () => true
+    });
 
     function reportUpdateUpTheChain(){
         window.location.hash = [this.state.year || "*"].join("-");
@@ -54,6 +67,8 @@ const Controls = ({ data, updateDataFilter }) => {
     }
 
     const years = new Set(data.map((d) => d.submit_date.getFullYear()));
+    const jobTitles = new Set(data.map((d) => d.clean_job_title));
+    const USstates = new Set(data.map((d) => d.USstate));
 
     return(
         <div>
@@ -62,6 +77,19 @@ const Controls = ({ data, updateDataFilter }) => {
                 toggleNames={Array.from(years.values())}
                 picked={filteredBy.year}
                 updateYearFilter={updateYearFilter}
+            />
+             <ControlRow
+                data={data}
+                toggleNames={Array.from(jobTitles.values())}
+                picked={filteredBy.jobTitle}
+                updateDataFilter={updateJobTitleFilter}
+            />
+            <ControlRow
+                data={data}
+                toggleNames={Array.from(USstates.values())}
+                picked={filteredBy.USstate}
+                updateDataFilter={updateUSstateFilter}
+                capitalize="true"
             />
         </div>
     );
