@@ -1,5 +1,17 @@
 import React, { useState, useEffect } from "react";
 
+const Toggle = ({ label, name, value, onClick }) => {
+    let className = "btn btn-default";
+    if (value) {
+        className += " btn-primary";
+    }
+    return (
+        <button className={className} onClick={() => onClick(name, !value)}>
+            {label}
+        </button>
+    );
+};
+
 const ControlRow = ({
     data,
     toggleNames,
@@ -29,12 +41,14 @@ const ControlRow = ({
 };
 
 const Controls = ({ data, updateDataFilter }) => {
+    let locationHash = window.location.hash.replace("#", "").split("-");
+
     const [ filteredBy, setFilteredBy ] = useState({
-        year: "*",
-        USstate: "*",
-        jobTitle: "*"
+        year: locationHash[0] || "*",
+        USstate: locationHash[1] || "*",
+        jobTitle: locationHash[2] || "*"
     });
-    const [ filter, setFilter ] = useState({
+    const [ filterFunctions, setFilter ] = useState({
         year: () => true,
         USstate: () => true,
         jobTitle: () => true
@@ -60,23 +74,23 @@ const Controls = ({ data, updateDataFilter }) => {
 
         if(reset || !year){
             yearFilter = () => true;
-            year = "w";
+            year = "*";
         }
 
         setFilteredBy((filteredBy) => {
             return { ...filteredBy, year };
         });
 
-        setFilter((filter) => {
-            return { ...filter, year: yearFilter}
+        setFilter((filterFunctions) => {
+            return { ...filterFunctions, year: yearFilter}
         });
 
-    }
+    };
 
     const updateJobTitleFilter = (jobTitle, reset) => {
-        let jobTitleFilter = (d) => d.clean_job_title === title;
+        let jobTitleFilter = (d) => d.clean_job_title === jobTitle;
 
-        if(reset || !title){
+        if(reset || !jobTitle){
             jobTitleFilter = () => true;
             jobTitle = "*";
         }
@@ -88,7 +102,7 @@ const Controls = ({ data, updateDataFilter }) => {
             return { ...filterFunctions, jobTitle: jobTitleFilter };
         });
 
-    }
+    };
 
     const updateUSstateFilter = (USstate, reset) => {
         let USstateFilter = (d) => d.USstate === USstate;
@@ -105,7 +119,7 @@ const Controls = ({ data, updateDataFilter }) => {
             return { ...filterFunctions, USstate: USstateFilter };
         });
 
-    }
+    };
 
     useEffect(() => {
         reportUpdateUpTheChain();
@@ -136,7 +150,7 @@ const Controls = ({ data, updateDataFilter }) => {
                 data={data}
                 toggleNames={Array.from(years.values())}
                 picked={filteredBy.year}
-                updateYearFilter={updateYearFilter}
+                updateDataFilter={updateYearFilter}
             />
              <ControlRow
                 data={data}
