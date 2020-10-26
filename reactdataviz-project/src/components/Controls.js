@@ -71,7 +71,6 @@ const Controls = ({ data, updateDataFilter }) => {
             return { ...filter, year: yearFilter}
         });
 
-        reportUpdateUpTheChain();
     }
 
     const updateJobTitleFilter = (jobTitle, reset) => {
@@ -89,7 +88,6 @@ const Controls = ({ data, updateDataFilter }) => {
             return { ...filterFunctions, jobTitle: jobTitleFilter };
         });
 
-        reportUpdateUpTheChain();
     }
 
     const updateUSstateFilter = (USstate, reset) => {
@@ -107,8 +105,26 @@ const Controls = ({ data, updateDataFilter }) => {
             return { ...filterFunctions, USstate: USstateFilter };
         });
 
-        reportUpdateUpTheChain();
     }
+
+    useEffect(() => {
+        reportUpdateUpTheChain();
+    }, [filteredBy, filterFunctions]);
+
+    useEffect(() => {
+        let [year, USstate, jobTitle] = window.location.hash.replace("#", "").split("-");
+
+        if (year !== "*" && year) {
+            updateYearFilter(Number(year));
+        }
+        if (USstate !== "*" && USstate) {
+            updateUSstateFilter(USstate);
+        }
+        if (jobTitle !== "*" && jobTitle) {
+            updateJobTitleFilter(jobTitle);
+        }
+
+    }, []);
 
     const years = new Set(data.map((d) => d.submit_date.getFullYear()));
     const jobTitles = new Set(data.map((d) => d.clean_job_title));
