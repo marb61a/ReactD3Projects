@@ -66,6 +66,28 @@ const Controls = ({ data, updateDataFilter }) => {
         reportUpdateUpTheChain();
     }
 
+    const updateJobTitleFilter = (jobTitle, reset) => {
+        let jobTitleFilter = (d) => d.clean_job_title === title;
+
+        if(reset || !title){
+            jobTitleFilter = () => true;
+            jobTitle = "*";
+        }
+
+        setFilteredBy((filteredBy) => {
+            return { ...filteredBy, jobTitle };
+        });
+        setFilter((filterFunctions) => {
+            return { ...filterFunctions, jobTitle: jobTitleFilter };
+        });
+
+        reportUpdateUpTheChain();
+    }
+
+    const updateUSstateFilter = (USstate, reset) => {
+        
+    }
+
     const years = new Set(data.map((d) => d.submit_date.getFullYear()));
     const jobTitles = new Set(data.map((d) => d.clean_job_title));
     const USstates = new Set(data.map((d) => d.USstate));
