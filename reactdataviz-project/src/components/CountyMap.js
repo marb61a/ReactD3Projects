@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import * as topojson from 'topojson';
 import _ from 'lodash';
 
-const ChloroplethColors = _.reverse([
+const ChoroplethColors = _.reverse([
     "rgb(247,251,255)",
     "rgb(222,235,247)",
     "rgb(198,219,239)",
@@ -20,12 +20,13 @@ const County = ({
     geoPath,
     feature,
     zoom,
+    key,
     quantize,
     value
 }) => {
     let color = BlankColor;
     if(value){
-        color = ChloroplethColors[quantize(value)];
+        color = ChoroplethColors[quantize(value)];
     }
 
     return(
@@ -45,7 +46,7 @@ function useQuantize(values){
             scale.domain([
                 d3.quantile(values, 0.15, d => d.value),
                 d3.quantile(values, 0.85, d => d.value)
-            ])
+            ]);
         }
 
         return scale;
@@ -65,7 +66,7 @@ function useProjection({ width, height, zoom, usTopoJson, USstateNames }){
         
         if(zoom && usTopoJson){
             const us = usTopoJson;
-            const USstatePaths = topojson.feature(us, us.objects.states).features;
+            const USstatePaths = topojson.feature(us, us.objects.counties).features;
             const id = _.find(USstateNames, { code: zoom}).id;
 
             projection.scale(width * 4.5);
@@ -108,7 +109,7 @@ const CountyMap = ({
         );
         const counties = topojson.feature(us, us.objects.states).features;
         const countyValueMap = _.fromPairs(
-            values.map(d => [d.countyID, d.value])
+            values.map((d) => [d.countyID, d.value])
         );
 
         return(
@@ -127,7 +128,7 @@ const CountyMap = ({
                     d={geoPath(USstatesMesh)}
                     style={{
                         fill: "none",
-                        stroke:"#fff",
+                        stroke: "#fff",
                         strokeLinejoin: "round"
                     }}
                 />
@@ -136,4 +137,4 @@ const CountyMap = ({
     }
 }
 
-export default CountyMap
+export default CountyMap;

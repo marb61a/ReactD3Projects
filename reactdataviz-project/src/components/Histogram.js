@@ -62,7 +62,7 @@ const Histogram = ({
                 {bars.map(
                     (bar) => (
                     <HistogramBar 
-                        percent={(bar.length / data.length)} 
+                        percent={(bar.length / data.length) * 100} 
                         x={axisMargin}
                         y={yScale(bar.x1)}
                         width={widthScale(bar.length)}
@@ -79,7 +79,7 @@ const Histogram = ({
                 type="Left"
             />
         </g>
-    )
-}
+    );
+};
 
 export default Histogram;

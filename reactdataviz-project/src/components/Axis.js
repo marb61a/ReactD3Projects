@@ -2,7 +2,7 @@ import React from 'react';
 import { useD3 } from "d3blackbox";
 import * as d3 from 'd3';
 
-const Axis = ({ x, y, scale, type="bottom" }) => {
+const Axis = ({ x, y, scale, type="Bottom" }) => {
     const gRef = useD3((anchor) => {
         const axis = d3[`axis${type}`](scale);
 

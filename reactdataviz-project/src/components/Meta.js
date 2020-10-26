@@ -5,7 +5,7 @@ import {
     extent as d3extent,
     deviation as d3deviation
 } from 'd3-array';
-import _, { sortBy } from "lodash";
+import _ from "lodash";
 import S from "string";
 
 import USStatesMap from '../USstatesMap';
@@ -58,7 +58,7 @@ export const Title = ({
     if(yearsFragment && USstateFragment){
         title =(
             <h2>
-                In {USstateFragment}, {jobTitleFragment()}${mean}/year{" "}
+                In {USstateFragment()}, {jobTitleFragment()}${mean}/year{" "}
                 {yearsFragment()}
             </h2>
         );
@@ -111,7 +111,7 @@ class Description extends React.Component{
             let lastYear = this.allDataForYear(year - 1);
 
             if(jobTitle !== "*"){
-                lastYear = this.allDataForUSstate(jobTitle, lastYear);
+                lastYear = this.allDataForJobTitle(jobTitle, lastYear);
             }
 
             if (USstate !== "*") {
