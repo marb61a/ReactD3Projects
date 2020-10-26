@@ -125,7 +125,7 @@ class Description extends React.Component{
             } else {
                 const percent = (
                     (1 - lastYear.length / this.props.data.length) *100
-                ).toFixed()
+                ).toFixed();
 
                 fragment = ", " + Math.abs(percent) + "% " +
                 (percent > 0 ? "more" : "less") + " than the year before";
@@ -153,7 +153,7 @@ class Description extends React.Component{
     }
 
     get countyFragment(){
-        const byCounty = _.groupBy(this.props.data);
+        const byCounty = _.groupBy(this.props.data, "countyID");
         const medians = this.props.medianIncomesByCounty;
 
         let ordered = _.sortBy(

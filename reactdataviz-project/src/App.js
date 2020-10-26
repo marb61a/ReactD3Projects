@@ -25,7 +25,7 @@ function App() {
     medianIncomesByCounty: {}
   });
 
-  const [ salariesFilter, setSalariesFilter ] = useState(() => true);
+  const [ salariesFilter, setSalariesFilter ] = useState(() => () => true);
 
   const [filteredBy, setFilteredBy] = useState({
     USstate: "*",
@@ -80,7 +80,7 @@ function App() {
     .filter((d) => !_.isNull(d));
 
   if(techSalaries.length < 1){
-    return <Preloader />
+    return <Preloader />;
   } else {
     let zoom = null;
     let medianHousehold = medianIncomesByUSState["US"][0]
@@ -96,7 +96,7 @@ function App() {
 
     return (<div className="App">
         <Title 
-          data={filteredSalaries}
+          filteredSalaries={filteredSalaries}
           filteredBy={filteredBy}
         />
         <Description 
@@ -115,6 +115,13 @@ function App() {
             width={500}
             height={500}
             zoom={zoom}
+          />
+          <rect
+            x="500"
+            y="0"
+            width="600"
+            height="500"
+            style={{ fill: "white" }}
           />
           <Histogram 
             bins={10}
@@ -138,6 +145,10 @@ function App() {
             value={(d) => d.base_salary}
           />
         </svg>
+        <Controls
+          data={techSalaries}
+          updateDataFilter={updateDataFilter}
+        />
       </div>
     )
   }

@@ -3,9 +3,7 @@ import * as d3 from 'd3';
 
 import Axis from './Axis';
 
-const HistogramBar = ({
-    percent, x, y, width, height
-}) => {
+const HistogramBar = ({ percent, x, y, width, height }) => {
     let translate = `translate(${x}, ${y})`
     let label = percent.toFixed(0) + "%";
 
@@ -37,12 +35,17 @@ const HistogramBar = ({
 }
 
 const Histogram = ({
-    bins, width, height, x, y, data, axisMargin, bottomMargin, value
+    bins, 
+    width, 
+    height, 
+    x, 
+    y, 
+    data, 
+    axisMargin, 
+    bottomMargin, 
+    value
 }) => {
-    const histogram = d3
-        .histogram()
-        .thresholds(bins)
-        .bins(value);
+    const histogram = d3.histogram().thresholds(bins).bins(value);
     
     const bars = histogram(data);
     const counts = bars.map((d) => d.length);
