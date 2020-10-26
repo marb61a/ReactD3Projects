@@ -36,14 +36,22 @@ const Controls = ({ data, updateDataFilter }) => {
     });
     const [ filter, setFilter ] = useState({
         year: () => true,
-        USstateFilter: () => true,
+        USstate: () => true,
         jobTitle: () => true
     });
 
     function reportUpdateUpTheChain(){
-        window.location.hash = [this.state.year || "*"].join("-");
+        window.location.hash = [
+            filteredBy.year,
+            filteredBy.USstate,
+            filteredBy.jobTitle,
+        ].join("-");
 
-        const filter = (d) => filterFunctions.year(d);
+        const filter = (d) => 
+            filterFunctions.year(d) &&
+            filterFunctions.USstate(d) && 
+            filterFunctions.jobTitle(d);
+
         updateDataFilter(filter, filteredBy);
     }
 
@@ -85,7 +93,21 @@ const Controls = ({ data, updateDataFilter }) => {
     }
 
     const updateUSstateFilter = (USstate, reset) => {
-        
+        let USstateFilter = (d) => d.USstate === USstate;
+
+        if (reset || !USstate) {
+            USstateFilter = () => true;
+            USstate = "*";
+        }
+
+        setFilteredBy((filteredBy) => {
+            return { ...filteredBy, USstate };
+        });
+        setFilter((filterFunctions) => {
+            return { ...filterFunctions, USstate: USstateFilter };
+        });
+
+        reportUpdateUpTheChain();
     }
 
     const years = new Set(data.map((d) => d.submit_date.getFullYear()));
