@@ -25,11 +25,11 @@ const cleanSalary = (d) => {
         clean_job_title: d["job title"],
         base_salary: Number(d["base salary"]),
         city: d["city"],
-        state: d["state"],
+        USstate: d["state"],
         county: d["county"],
         countyID: d["countyID"]
-    }
-}
+    };
+};
 
 const cleanUSStateName = (d) => ({
     code: d.code,
@@ -48,7 +48,7 @@ export const loadAllData = async () => {
         d3.csv("data/us-county-names-normalized.csv", cleanCounty),
         d3.csv("data/county-median-incomes.csv", cleanIncome),
         d3.csv("data/h1bs-2012-2016.csv", cleanSalary),
-        d3.csv("data/us-state-names.tsv", cleanUSStateName),
+        d3.tsv("data/us-state-names.tsv", cleanUSStateName),
     ]);
     
     let [us, countyNames, medianIncomes, techSalaries, USstateNames] = datasets;
@@ -77,4 +77,4 @@ export const loadAllData = async () => {
         USstateNames: USstateNames
     };
 
-}
+};

@@ -1,10 +1,9 @@
-import React from 'react';
-import * as d3 from 'd3';
-
-import Axis from './Axis';
-
+import React from "react";	
+import * as d3 from "d3";	
+    
+import Axis from "./Axis";
 const HistogramBar = ({ percent, x, y, width, height }) => {
-    let translate = `translate(${x}, ${y})`
+    let translate = `translate(${x}, ${y})`;
     let label = percent.toFixed(0) + "%";
 
     if(percent < 1){
@@ -43,9 +42,9 @@ const Histogram = ({
     data, 
     axisMargin, 
     bottomMargin, 
-    value
+    value,
 }) => {
-    const histogram = d3.histogram().thresholds(bins).bins(value);
+    const histogram = d3.histogram().thresholds(bins).value(value);
     
     const bars = histogram(data);
     const counts = bars.map((d) => d.length);
@@ -75,7 +74,7 @@ const Histogram = ({
                 ))}
             </g>
             <Axis 
-                x={axisMargin-3}
+                x={axisMargin - 3}
                 y={0}
                 data={bars}
                 scale={yScale}

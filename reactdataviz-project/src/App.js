@@ -14,7 +14,6 @@ import { loadAllData } from './DataHandling';
 import { Title, Description } from "./components/Meta";
 
 function App() {
-  // Will mean only rendering once rather than 5 times from different states
   const [datasets, setDatasets] = useState({
     techSalaries: [],
     medianIncomes: [],
@@ -43,10 +42,10 @@ function App() {
     medianIncomesByUSState
   } = datasets;
 
-  async function loadData() {
-    const datasets = await loadAllData();
-    setDatasets(datasets);
-  };
+	async function loadData() {	
+    const datasets = await loadAllData();	
+    setDatasets(datasets);	
+  }
 
   function countyValue(county, techSalariesMap){
     const medianHousehold = medianIncomes[county.id];

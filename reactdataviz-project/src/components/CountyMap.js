@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react';
-import * as d3 from 'd3';
-import * as topojson from 'topojson';
-import _ from 'lodash';
+import React, { useMemo } from "react";	
+import * as d3 from "d3";	
+import * as topojson from "topojson";	
+import _ from "lodash";
 
 const ChoroplethColors = _.reverse([
     "rgb(247,251,255)",
@@ -44,8 +44,8 @@ function useQuantize(values){
 
         if(values){
             scale.domain([
-                d3.quantile(values, 0.15, d => d.value),
-                d3.quantile(values, 0.85, d => d.value)
+                d3.quantile(values, 0.15, (d) => d.value),
+                d3.quantile(values, 0.85, (d) => d.value)
             ]);
         }
 
@@ -66,7 +66,7 @@ function useProjection({ width, height, zoom, usTopoJson, USstateNames }){
         
         if(zoom && usTopoJson){
             const us = usTopoJson;
-            const USstatePaths = topojson.feature(us, us.objects.counties).features;
+            const USstatePaths = topojson.feature(us, us.objects.states).features;
             const id = _.find(USstateNames, { code: zoom}).id;
 
             projection.scale(width * 4.5);
@@ -74,8 +74,8 @@ function useProjection({ width, height, zoom, usTopoJson, USstateNames }){
             const translate = projection.translate();
 
             projection.translate([
-                translate[0] - centroid[0] + width/2,
-                translate[1] - centroid[1] + height/2
+                translate[0] - centroid[0] + width / 2,
+                translate[1] - centroid[1] + height / 2
             ]);
         }
 
@@ -91,7 +91,7 @@ const CountyMap = ({
     width,
     height,
     zoom,
-    values
+    values,
 }) => {
     const geoPath  = useProjection({ 
         width, height, zoom, usTopoJson, USstateNames 
@@ -107,7 +107,7 @@ const CountyMap = ({
             us.objects.states,
             (a, b) => a !== b
         );
-        const counties = topojson.feature(us, us.objects.states).features;
+        const counties = topojson.feature(us, us.objects.counties).features;
         const countyValueMap = _.fromPairs(
             values.map((d) => [d.countyID, d.value])
         );
@@ -134,7 +134,7 @@ const CountyMap = ({
                 />
             </g>
         )
-    }
-}
+    };
+};
 
 export default CountyMap;
