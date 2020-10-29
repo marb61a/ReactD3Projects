@@ -23,7 +23,7 @@ function App() {
   const [ data, setData ] = useState(null);
 
   useEffect(() => {
-    d3.tsv("./public/data.tsv", d => {
+    d3.tsv("./data.tsv", d => {
       const year = Number(d.movie.match(/\((\d+)\)/)[1]);
 
       return{
@@ -32,8 +32,8 @@ function App() {
         per_year: Number(d.box_office) / (2018 - year),
         box_office: Number(d.box_office)
       }
-    }, [!data]);
-  });
+    }).then(setData);
+  }, [!data]);
 
   const [perYear, setPerYear] = useState(false);
   const valueFunction = perYear ? d => d.per_year : d => d.box_office;

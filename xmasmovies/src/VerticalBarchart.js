@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const Bar = styled.rect`
     fill: green;
-    transition: width 500 ms;
+    transition: width 500ms;
 `;
 
 const Label = styled.text`
@@ -18,7 +18,7 @@ const VerticalBarchart = ({data, width, height, value}) => {
         .scaleBand()
         .paddingInner(0.1)
         .domain(data.map(d => d.movie))
-        .range([0, height])
+        .range([0, height]);
     
     const widthScale = d3
         .scaleLinear()
@@ -28,18 +28,21 @@ const VerticalBarchart = ({data, width, height, value}) => {
     return(
         <g>
             {data.map(d => (
-                <React.Fragment>
+                <React.Fragment key={d.movie}>
                     <Bar 
                         x={0}
                         y={yScale(d.movie)}
                         height={yScale.bandwidth()}
                         width={widthScale(value(d))}
                     />
+                    	<Label x={10} y={yScale(d.movie) + yScale.bandwidth() / 2}>	
+                            {d.movie}	
+                        </Label>
                 </React.Fragment>
             ))}
         </g>
     );
 
-}
+};
 
 export default VerticalBarchart;
