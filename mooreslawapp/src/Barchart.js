@@ -22,7 +22,7 @@ const Bar = ({ data, y, width, thickness}) => {
                 height={thickness}
                 fill="white"
             />
-            <label >
+            <label y={thickness / 2}>
                 {data.name}
             </label>
         </g>
@@ -42,8 +42,12 @@ const Barchart = ({ data, x, y, barThickness, width}) => {
         .range([0, width]);
     
     return(
-        <g>
-            <Bar />
+        <g transform={`translate(${x}, ${y})`}>
+            {data.map(d => {
+                <Bar 
+                
+                />
+            })}
         </g>
     )
 };
