@@ -69,11 +69,41 @@ const Barchart = ({ data, x, y, barThickness, width}) => {
         [data.length, barThickness]
         
     );
+
+    const color = useMemo(
+        () => d3
+            .scaleOrdinal()
+            .domain([
+                "AMD",
+                "ARM",
+                "Apple",
+                "Fujitsu",
+                "Hitachi",
+                "Huawei",
+                "IBM",
+                "Intel",
+                "Microsoft/AMD",
+                "Motorola",
+                "NEC",
+                "Nvidia",
+                "Oracle",
+                "Samsung",
+                "Sun/Oracle",
+                "Toshiba",
+                "Moore"
+            ])
+            .range(),
+            []
+    );
     
+    // This will not be put into a useMemo because the
+    // data changes each time
     const xScale = d3
         .scaleLinear()
         .domain([0, d3.max(data, d => d.transistors)])
         .range([0, width]);
+    
+    const formatter = xScale.tickFormat();
     
     return(
         <g transform={`translate(${x}, ${y})`}>
@@ -82,6 +112,10 @@ const Barchart = ({ data, x, y, barThickness, width}) => {
                     data={d}
                     key={d.name}
                     y={yScale(index)}
+                    width={xScale(d.transistors)}
+                    formatter={formatter}
+                    thickness={yScale.bandwidth()}
+                    color={color(d.designer) || "white"}
                 />
             })}
         </g>
