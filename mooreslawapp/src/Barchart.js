@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import styled from "styled-components";
 import * as d3 from "d3";
 
@@ -9,6 +9,16 @@ const label = styled.text`
         "Helvetica Neue", sans-serif;
     font-size: 14px;
     text-anchor: end;
+    alignment-baseline: middle;
+`;
+
+const EndLabel = styled.text`
+    fill: white;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    text-anchor: start;
     alignment-baseline: middle;
 `;
 
@@ -27,7 +37,7 @@ const useTransition = (targetValue, name) => {
     }, [targetValue]);
 
     return renderValue;
-}
+};
 
 const Bar = ({ data, y, width, thickness}) => {
     const renderWidth = useTransition(width, `width-${data.name}`);
@@ -46,15 +56,19 @@ const Bar = ({ data, y, width, thickness}) => {
                 {data.name}
             </label>
         </g>
-    )
-}
+    );
+};
 
 const Barchart = ({ data, x, y, barThickness, width}) => {
-    const yScale = d3
-        .scaleBand()
-        .domain(data.map(d => d.name))
-        .paddingInner(0.2)
-        .range([data.length * barWidth, 0]);
+    const yScale = useMemo(
+        () => d3
+            .scaleBand()
+            .domain(data.map(d => d.name))
+            .paddingInner(0.2)
+            .range([data.length * barWidth, 0]),
+        [data.length, barThickness]
+        
+    );
     
     const xScale = d3
         .scaleLinear()
@@ -65,7 +79,9 @@ const Barchart = ({ data, x, y, barThickness, width}) => {
         <g transform={`translate(${x}, ${y})`}>
             {data.map(d => {
                 <Bar 
-                
+                    data={d}
+                    key={d.name}
+                    y={yScale(index)}
                 />
             })}
         </g>
