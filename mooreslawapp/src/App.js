@@ -21,8 +21,25 @@ const Year = styled.text`
     text-anchor: end;
 `;
 
-const useData = () => {
+const Title = styled.text`
+    fill: white;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
+    font-size: 26px;
+    font-weight: bold;
+    text-anchor: middle;
+`;
 
+// This will be replaced when actual data is loaded
+const useData = () => {
+  const [data, setData] = useState(null);
+
+  useEffect(function() {
+
+  }, []);
+
+  return data;
 };
 
 function App() {
@@ -34,10 +51,11 @@ function App() {
     .range([0, 2025 - 1970]);
   
   // If possible use D3 timers rather than the JS equivalent
-  // D3 timers are more intelligent
+  // D3 timers are more intelligent. This is a simle counter
+  // which drives the animation
   useEffect(() => {
     const interval = d3.interval(() => {
-      console.log("Interval Ran!");
+      // console.log("Interval Ran!");
 
       if(currentYear > 2025){
         interval.stop();
@@ -47,10 +65,14 @@ function App() {
     }, 1000);
 
     return () => interval.stop();
-  }, []);
+  }, [data]);
 
   return (
-    <svg>
+    <svg x={"50%"} y={30}>
+      <Title>
+        Moore's law vs. actual transistor count in React & D3
+      </Title>
+
       {data ? (
         <Barchart 
           data={data[0]}
