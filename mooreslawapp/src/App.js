@@ -31,6 +31,14 @@ const Title = styled.text`
     text-anchor: middle;
 `;
 
+const getYear = row => {
+    Number(row["Date of introduction"].replace(/\[.*\]/g, ""));
+}
+
+const getName = (row, type) => {
+    `${row["Processor"].replace(/\(.*\)/g, "")} (${type})`;
+}
+
 // This will be replaced when actual data is loaded
 const useData = () => {
   const [data, setData] = useState(null);
@@ -99,16 +107,25 @@ function App() {
       <Title>
         Moore's law vs. actual transistor count in React & D3
       </Title>
-
-      {data ? (
-        <Barchart 
-          data={data[0]}
-          x={100}
-          y={50}
-          barThickness={20}
-          width={500}
-        />
-      ) : null}
+      <Barchart 
+        data={[
+          ...((data && data[currentYear]) || []),
+          {
+            name: "Moore's law",
+            designer: "Moore",
+            year: currentYear,
+            type: "",
+            transistors: mooresLaw[currentYear]
+          }
+        ]}
+        x={100}
+        y={50}
+        barThickness={20}
+        width={500}
+      />
+      <Year x={"95%"} y={"95%"}>
+        {currentYear}
+      </Year>
     </svg>
   );
 }
