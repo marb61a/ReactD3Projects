@@ -35,8 +35,32 @@ const Title = styled.text`
 const useData = () => {
   const [data, setData] = useState(null);
 
-  useEffect(function() {
+  useEffect(() => {
+    const processors = d3
+      .range(10)
+      .map(i => `CPU ${i}`);
+    const random = d3.randomUniform(1000, 50000);
 
+    let N = 2;
+
+    // Create random transistor counts for every year
+    const data = d3
+      .range(1970, 2026)
+      .map(year => {
+        if(year % 5 === 0){
+          N += 1;
+        }
+
+        return d3
+          .range(N)
+          .map(i => ({
+            year: year,
+            name: processors[i],
+            transistors: Math.round(random())
+          }))
+      });
+
+      setData(data);
   }, []);
 
   return data;
@@ -56,13 +80,15 @@ function App() {
   useEffect(() => {
     const interval = d3.interval(() => {
       // console.log("Interval Ran!");
+      setCurrentYear(year => {
+        if (!data[year + 1]) {
+            interval.stop();
+            return year;
+        }
 
-      if(currentYear > 2025){
-        interval.stop();
-      }
-
-      setCurrentYear(year => year + 1);
-    }, 1000);
+        return year + 1;
+      });
+    }, 2000);
 
     return () => interval.stop();
   }, [data]);
