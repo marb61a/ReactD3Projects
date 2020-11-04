@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import * as d3 from "d3";
 
@@ -12,7 +12,27 @@ const label = styled.text`
     alignment-baseline: middle;
 `;
 
+const useTransition = (targetValue, name) => {
+    const [renderValue, setRenderValue] = useState(targetValue);
+
+    useEffect(() => {
+        d3.selection()
+            .transition(name)
+            .duration(2000)
+            .tween(name, () => {
+                const interpolate = d3.interpolate(renderValue, targetValue);
+
+                return t => setRenderValue(interpolate(t));
+            })
+    }, [targetValue]);
+
+    return renderValue;
+}
+
 const Bar = ({ data, y, width, thickness}) => {
+    const renderWidth = useTransition(width, `width-${data.name}`);
+    const renderY = useTransition(y, `y-${data.name}`);
+
     return(
         <g transform={`translate(${0}, ${y})`}>
             <rect 

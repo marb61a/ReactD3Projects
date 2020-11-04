@@ -41,13 +41,14 @@ const useData = () => {
       .map(i => `CPU ${i}`);
     const random = d3.randomUniform(1000, 50000);
 
-    let N = 2;
+    // Will add a processor every 15 seconds
+    let N = 1;
 
     // Create random transistor counts for every year
     const data = d3
       .range(1970, 2026)
       .map(year => {
-        if(year % 5 === 0){
+        if(year % 5 === 0 && N < 10){
           N += 1;
         }
 
