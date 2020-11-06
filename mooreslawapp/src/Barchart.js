@@ -39,12 +39,35 @@ const useTransition = (targetValue, name) => {
     return renderValue;
 };
 
-const Bar = ({ data, y, width, thickness}) => {
-    const renderWidth = useTransition(width, `width-${data.name}`);
-    const renderY = useTransition(y, `y-${data.name}`);
+const Bar = ({ data, y, width, thickness, formatter, color }) => {
+    const renderWidth = useTransition({
+        targetValue: width, 
+        name: `width-${data.name}`,
+        easing: data.designer === "Moore" ? d3.easeLinear : d3.easeCubicInOut
+    });
+
+    const renderY = useTransition({
+        targetValue: y, 
+        name: `y-${data.name}`,
+        startValue: -500 + Math.random() * 200,
+        easing: d3.easeCubicInOut
+    });
+
+    const renderX = useTransition({
+        targetValue: 0,
+        name: `x-${data.name}`,
+        startValue: 1000 + Math.random() * 200,
+        easing: d3.easeCubicInOut
+    });
+
+    const transistors = useTransition({
+        targetValue: data.transistors,
+        name: `trans-${data.name}`,
+        easing: d3.easeLinear
+    });
 
     return(
-        <g transform={`translate(${0}, ${y})`}>
+        <g transform={`translate(${renderX}, ${renderY})`}>
             <rect 
                 x={10}
                 y={0}
