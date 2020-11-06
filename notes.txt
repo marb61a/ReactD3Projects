@@ -257,5 +257,4 @@ Creating a new Project
         - This is not widely used as one is functional and the other class based
         - They contain a large amount of similar information so can be put together
         - Class based and functional components should be able to work together so there should not be an issue
-        - 
-    -
+        
