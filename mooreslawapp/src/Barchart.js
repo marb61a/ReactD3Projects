@@ -55,10 +55,18 @@ const Bar = ({ data, y, width, thickness}) => {
             <label y={thickness / 2}>
                 {data.name}
             </label>
+            <EndLabel y={thickness / 2} x={renderWidth + 15}>
+                {
+                    data.designer === "Moore" ?
+                    formatter(Math.round(transistors)) :
+                    formatter(data.transistors)
+                }
+            </EndLabel>
         </g>
     );
 };
 
+// Will draw the barchart for a year
 const Barchart = ({ data, x, y, barThickness, width}) => {
     const yScale = useMemo(
         () => d3
@@ -92,7 +100,25 @@ const Barchart = ({ data, x, y, barThickness, width}) => {
                 "Toshiba",
                 "Moore"
             ])
-            .range(),
+            .range([
+                "#009933",
+                "#0091BD",
+                "#A3AAAE",
+                "#d30909",
+                "#F4ABAA",
+                "#FA0505",
+                "#1F70C1",
+                "#0171C5",
+                "#7FBA02",
+                "#008DD2",
+                "#14149F",
+                "#77B900",
+                "#F70000",
+                "#034EA1",
+                "#7F7F7F",
+                "#FF0000",
+                "#D92AAD"
+            ]),
             []
     );
     
