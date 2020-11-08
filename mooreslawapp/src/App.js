@@ -39,40 +39,39 @@ const getName = (row, type) => {
     `${row["Processor"].replace(/\(.*\)/g, "")} (${type})`;
 }
 
-// This will be replaced when actual data is loaded
+const getTransistors = row => {
+  Number(
+    row["MOS transistor count"]
+      .replace(/\[.*\]/g, "")
+      .replace(/[^0-9]/g, "")
+  );
+}
+ 
+// The useEffect will be replaced when actual data is loaded
 const useData = () => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    const processors = d3
-      .range(10)
-      .map(i => `CPU ${i}`);
-    const random = d3.randomUniform(1000, 50000);
+    (async() => {
+      const datas = await Promise.all([
+        d3.csv("data/microprocessors.csv", row => ({	
+          name: getName(row, "CPU"),	
+          designer: row["Designer"],	
+          year: getYear(row),	
+          transistors: getTransistors(row),	
+          type: "CPU"	
+        })),	
+        d3.csv("data/gpus.csv", row => ({	
+            name: getName(row, "GPU"),	
+            designer: row["Designer"],	
+            year: getYear(row),	
+            transistors: getTransistors(row),	
+            type: "GPU"	
+        }))
+      ])
+    })
+  }, {});
 
-    // Will add a processor every 15 seconds
-    let N = 1;
-
-    // Create random transistor counts for every year
-    const data = d3
-      .range(1970, 2026)
-      .map(year => {
-        if(year % 5 === 0 && N < 10){
-          N += 1;
-        }
-
-        return d3
-          .range(N)
-          .map(i => ({
-            year: year,
-            name: processors[i],
-            transistors: Math.round(random())
-          }))
-      });
-
-      setData(data);
-  }, []);
-
-  return data;
 };
 
 function App() {
