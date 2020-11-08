@@ -68,10 +68,28 @@ const useData = () => {
             transistors: getTransistors(row),	
             type: "GPU"	
         }))
-      ])
-    })
-  }, {});
+      ]);
 
+      // Group by the year and accumulate everything from previous
+      const grouped = datas
+        .flat()
+        .sort((a, b) => a.year - b.year)
+        .reduce((groups, el) => {
+          if(!groups[el.year]){
+            const previous = groups[el.year - 1];	
+            groups[el.year] = previous || [];
+            
+            groups[el.year] = [...groups[el.year], el];	
+            
+            return groups;
+          }
+        }, {});
+
+        setData(grouped);
+    })();
+  }, []);
+
+  return data;
 };
 
 function App() {
