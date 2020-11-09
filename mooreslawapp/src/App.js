@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import * as d3 from "d3";
-import faker from "faker";
+// import faker from "faker";
 
 import Barchart from './Barchart';
 
@@ -35,9 +35,8 @@ const getYear = row => {
     Number(row["Date of introduction"].replace(/\[.*\]/g, ""));
 }
 
-const getName = (row, type) => {
+const getName = (row, type) => 
     `${row["Processor"].replace(/\(.*\)/g, "")} (${type})`;
-}
 
 const getTransistors = row => {
   Number(
@@ -78,11 +77,11 @@ const useData = () => {
           if(!groups[el.year]){
             const previous = groups[el.year - 1];	
             groups[el.year] = previous || [];
-            
-            groups[el.year] = [...groups[el.year], el];	
-            
-            return groups;
           }
+
+          groups[el.year] = [...groups[el.year], el];	
+            
+          return groups;
         }, {});
 
         setData(grouped);
@@ -95,10 +94,23 @@ const useData = () => {
 function App() {
   const data = useData(); 
   const [currentYear, setCurrentYear] = useState(1970);
-  const yearIndex = d3
-    .scaleLinear()
-    .domain([1970, 2025])
-    .range([0, 2025 - 1970]);
+
+  // Moores law doubles the number of transistors every 2 years
+  const mooresLaw = d3
+    .range(1971, 2025)
+    .reduce((law, year) => {
+      if(year % 2 === 0){
+        const count = law[year - 2] * 2;
+        const delta = count - law[year - 2];
+
+        law[year - 1] = law[year - 2] + delta / 2;
+        law[year] = count;
+      }
+
+      return law;
+    },
+      { 1970: 1000 }
+    );
   
   // If possible use D3 timers rather than the JS equivalent
   // D3 timers are more intelligent. This is a simle counter
@@ -120,8 +132,8 @@ function App() {
   }, [data]);
 
   return (
-    <svg x={"50%"} y={30}>
-      <Title>
+    <Svg>
+      <Title x={"50%"} y={30}>
         Moore's law vs. actual transistor count in React & D3
       </Title>
       <Barchart 
@@ -135,7 +147,7 @@ function App() {
             transistors: mooresLaw[currentYear]
           }
         ]}
-        x={100}
+        x={150}
         y={50}
         barThickness={20}
         width={500}
@@ -143,7 +155,7 @@ function App() {
       <Year x={"95%"} y={"95%"}>
         {currentYear}
       </Year>
-    </svg>
+    </Svg>
   );
 }
 

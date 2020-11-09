@@ -22,7 +22,7 @@ const EndLabel = styled.text`
     alignment-baseline: middle;
 `;
 
-const useTransition = (targetValue, name, startValue, easing ) => {
+const useTransition = ({targetValue, name, startValue, easing }) => {
     const [renderValue, setRenderValue] = useState(startValue || targetValue);
 
     useEffect(() => {
