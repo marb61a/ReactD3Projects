@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import * as d3 from "d3";
-// import faker from "faker";
+import faker from "faker";
 
 import Barchart from './Barchart';
 
@@ -31,20 +31,18 @@ const Title = styled.text`
     text-anchor: middle;
 `;
 
-const getYear = row => {
+const getYear = row =>
     Number(row["Date of introduction"].replace(/\[.*\]/g, ""));
-}
 
 const getName = (row, type) => 
     `${row["Processor"].replace(/\(.*\)/g, "")} (${type})`;
 
-const getTransistors = row => {
+const getTransistors = row =>
   Number(
     row["MOS transistor count"]
       .replace(/\[.*\]/g, "")
       .replace(/[^0-9]/g, "")
   );
-}
  
 // The useEffect will be replaced when actual data is loaded
 const useData = () => {
