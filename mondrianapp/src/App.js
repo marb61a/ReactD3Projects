@@ -10,8 +10,13 @@ function App() {
       <svg
         width="100%"
         height="100%"
-        style={{border: "1px solid red"}}
       >
+          <Mondrian 
+            x={100}
+            y={10}
+            width={1000}
+            height={1000}
+          />
       </svg>
     </div>
   );

@@ -5,6 +5,8 @@ Intro to D3
         - https://github.com/d3/d3
     - Open Source and used by a lot of companies
     - There are a lot of libraries built on D3
+    - D3 documents wiki available at the following url
+        - https://d3-wiki.readthedocs.io/zh_CN/master/
 
 Insights into learning D3
     - It can be difficult to learn and understand
@@ -257,4 +259,18 @@ Creating a new Project
         - This is not widely used as one is functional and the other class based
         - They contain a large amount of similar information so can be put together
         - Class based and functional components should be able to work together so there should not be an issue
-        
+
+CSS Grid Generator 
+    - https://cssgrid-generator.netlify.app/
+
+CSS Grid Builder
+    - https://www.layoutit.com/
+
+Treemaps
+    - A Treemap displays hierarchical data as a set of nested rectangles
+        - https://www.d3-graph-gallery.com/treemap
+    - Each group is represented by a rectangle, which area is proportional to its value
+    - More on the theory of treemaps can be found at the folllowing urls
+        - https://www.data-to-viz.com/
+        - https://d3-wiki.readthedocs.io/zh_CN/master/Treemap-Layout/
+    - 
