@@ -24,11 +24,32 @@ const Range = ({ name, value, onChnage }) => {
 }
 
 function App() {
+  const [redRatio, setRedRatio] = useState(0.2);
+  const [yellowRatio, setYellowRatio] = useState(0.4);
+  const [blueRatio, setBlueRatio] = useState(0.1);
+  const [blackRatio, setBlackRatio] = useState(0.1);
+  const [width, setWidth] = useState(600);
+  const [height, setHeight] = useState(400);
+  const [subdivisions, setSubdivisions] = useState(0.5);
+  const [maxDepth, setMaxDepth] = useState(0.4);
+
+  let mondrian = useMondrianGenerator({
+    redRatio,
+    yellowRatio,
+    blueRatio,
+    blackRatio,
+    subdivisions,
+    maxDepth
+  });
+
   return (
     <div className="App">
       <header>
         <h1>Piet Mondrian Art Generator</h1>
-        
+        <p>Change the parameters to see what happens</p>
+        <div>
+          
+        </div>
       </header>
       <svg
         width="100%"
