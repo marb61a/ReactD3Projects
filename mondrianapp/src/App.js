@@ -21,7 +21,7 @@ const Range = ({ name, value, onChange }) => {
       />      
     </div>
   );
-}
+};
 
 function App() {
   const [redRatio, setRedRatio] = useState(0.2);
@@ -95,15 +95,15 @@ function App() {
         </div>
       </header>
       <svg
-        width="100%"
+        width={width}
         height="100%"
         style={{ margin: "0 auto" }}
       >
           <Mondrian 
-            x={100}
-            y={10}
-            width={1000}
-            height={1000}
+            x={0}
+            y={20}
+            width={width}
+            height={height}
             data={mondrian}
           />
       </svg>

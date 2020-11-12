@@ -59,9 +59,24 @@ function useMondrianGenerator({
     const updateColors = node => ({
         ...node,
         color: createColor({
-            
-        })
+            redRatio,
+            yellowRatio,
+            blueRatio,
+            blackRatio
+        }),
+        children: node.children ?
+        node.children.map(updateColors) :
+        null
     });
+
+    mondrian = useMemo(() => updateColors(mondrian), [
+        redRatio,
+        yellowRatio,
+        blueRatio,
+        blackRatio,
+        subdivisions,
+        maxDepth
+    ]);
 
     return mondrian;
 }
