@@ -2,7 +2,7 @@ import React from "react";
 import * as d3 from "d3";
 import { hierarchy } from "d3-hierarchy";
 
-const MondrianReactangle = ({ node}) => {
+const MondrianRectangle = ({ node}) => {
     const { x0, y0, x1, y1, children } = node;
     const width = x1 - x0;
     const height = y1 - y0;
@@ -20,7 +20,13 @@ const MondrianReactangle = ({ node}) => {
                     stroke: black,
                     strokeWidth: 5
                 }}
+                onClick={() => alert(`This node is ${node.data.color}`)}
             />
+            {
+                children && children.map((node, i) => (
+                    <MondrianRectangle node={node} key={i} />
+                ))
+            }
         </>
     );
 
@@ -31,14 +37,17 @@ const Mondrian = ({ x, y, width, height, data }) => {
         .treemap()
         .size([width, height])
         .padding(5)
-        .tile(d3.treemapBinary)
+        .tile(d3.treemapBinary);
+    
+    const root = treemap(
+        hierarchy(data)
+            .sum(d => d.value)
+            .sort((a, b) => 0.5 - Math.random())
+    );
 
     return(
         <g transform={`translate(${x}, ${y})`}>
-            <rect 
-                width={width}
-                height={height}
-            />
+            <MondrianRectangle node={root} />
         </g>
     );
     
