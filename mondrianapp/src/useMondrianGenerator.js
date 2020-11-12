@@ -39,10 +39,28 @@ function useMondrianGenerator({
                     blackRatio
                 }),
                 children: 
-                    
-            }
+                    depth < maxDepth * 5 ?
+                    d3.range(N).map(_ => generateMondrian({
+                        value: value / N,
+                        depth: depth + 1
+                    })) :
+                    null
+            };
         };
 
+        return generateMondrian({
+            value: 100
+        });
+
+    }, [subdivisions, maxDepth]);
+
+    // This will recalculate the node colours everytime that there
+    // is a rerender
+    const updateColors = node => ({
+        ...node,
+        color: createColor({
+            
+        })
     });
 
     return mondrian;
