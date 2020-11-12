@@ -79,16 +79,32 @@ function App() {
             onChange={setMaxDepth}
           />
         </div>
+        <div>
+          <label>Width: </label>
+          <input 
+            type="number"
+            value={width}
+            onChange={event => setWidth(event.target.value)}
+          />
+          <label>Height: </label>
+          <input
+            type="number"
+            value={height}
+            onChange={event => setHeight(event.target.value)}
+          />
+        </div>
       </header>
       <svg
         width="100%"
         height="100%"
+        style={{ margin: "0 auto" }}
       >
           <Mondrian 
             x={100}
             y={10}
             width={1000}
             height={1000}
+            data={mondrian}
           />
       </svg>
     </div>

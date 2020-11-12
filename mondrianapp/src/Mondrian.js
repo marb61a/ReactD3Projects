@@ -26,7 +26,13 @@ const MondrianReactangle = ({ node}) => {
 
 };
 
-const Mondrian = ({ x, y, width, height }) => {
+const Mondrian = ({ x, y, width, height, data }) => {
+    const treemap = d3
+        .treemap()
+        .size([width, height])
+        .padding(5)
+        .tile(d3.treemapBinary)
+
     return(
         <g transform={`translate(${x}, ${y})`}>
             <rect 
