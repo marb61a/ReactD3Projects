@@ -5,7 +5,7 @@ import './App.css';
 import Mondrian from './Mondrian';
 import useMondrianGenerator from "./useMondrianGenerator";
 
-const Range = ({ name, value, onChnage }) => {
+const Range = ({ name, value, onChange }) => {
   return(
     <div style={{ display: "inline-block" }}>
       {name}
@@ -48,7 +48,36 @@ function App() {
         <h1>Piet Mondrian Art Generator</h1>
         <p>Change the parameters to see what happens</p>
         <div>
-          
+          <Range 
+            name="red"
+            value={redRatio}
+            onChange={setRedRatio}
+          />
+          <Range
+            name="yellow"
+            value={yellowRatio}
+            onChange={setYellowRatio}
+          />
+          <Range 
+            name="blue"
+            value={blueRatio}
+            onChange={setBlueRatio}
+          />
+          <Range 
+            name="black"
+            value={blackRatio}
+            onChange={setBlackRatio}
+          />
+          <Range 
+            name="subdivisions"
+            value={subdivisions}
+            onChange={setSubdivisions}
+          />
+          <Range 
+            name="maxDepth"
+            value={maxDepth}
+            onChange={setMaxDepth}
+          />
         </div>
       </header>
       <svg
