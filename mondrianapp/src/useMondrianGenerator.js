@@ -16,8 +16,32 @@ const createColor = ({ redRatio, blueRatio, yellowRatio, blackRatio }) => {
     return d3.shuffle(probabilitySpace)[0];
 };
 
-function useMondrianGenerator(){
+function useMondrianGenerator({
+    redRatio,
+    yellowRatio,
+    blueRatio,
+    blackRatio,
+    subdivisions,
+    maxDepth 
+}){
     let mondrian = useMemo(() => {
+        const generateMondrian = ({ value, depth = 0 }) => {
+            const N = Math.round(
+                1 + Math.random() * (subdivisions * 10 - depth)
+            );
+
+            return {
+                value,
+                color: createColor({
+                    redRatio,
+                    yellowRatio,
+                    blueRatio,
+                    blackRatio
+                }),
+                children: 
+                    
+            }
+        };
 
     });
 
